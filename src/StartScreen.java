@@ -122,8 +122,8 @@ public class StartScreen {
 		btnUpdateOrder.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				UpdateOrder uoOrder = new UpdateOrder(shlCustomGuitarOrdering, 0);
-				uoOrder.open();
+				UpdateOrder uOrder = new UpdateOrder(shlCustomGuitarOrdering, 0);
+				uOrder.open();
 			}
 		});
 		btnUpdateOrder.setText("Update Status");
