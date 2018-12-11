@@ -18,6 +18,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.jface.viewers.TableViewer;
 
 import java.awt.Dialog;
+import java.awt.Window;
 
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.TableViewerColumn;
@@ -98,7 +99,8 @@ public class StartScreen {
 		btnAddOrder.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				
+				AddOrder addOrder = new AddOrder();
+				addOrder.open();
 			}
 		});
 		btnAddOrder.setLocation(10, 22);
