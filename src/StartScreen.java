@@ -13,6 +13,11 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.layout.TableColumnLayout;
+import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.jface.viewers.ColumnPixelData;
 
 public class StartScreen {
 
@@ -56,46 +61,10 @@ public class StartScreen {
 		shlCustomGuitarOrdering.setText("Custom Guitar Ordering System");
 		shlCustomGuitarOrdering.setLayout(new FormLayout());
 		
-		Composite composite = new Composite(shlCustomGuitarOrdering, SWT.NONE);
-		FormData fd_composite = new FormData();
-		fd_composite.top = new FormAttachment(0, 10);
-		fd_composite.left = new FormAttachment(0, 10);
-		fd_composite.right = new FormAttachment(0, 619);
-		composite.setLayoutData(fd_composite);
-		composite.setLayout(new GridLayout(1, false));
-		
-		table = new Table(composite, SWT.BORDER | SWT.FULL_SELECTION);
-		GridData gd_table = new GridData(SWT.LEFT, SWT.FILL, false, true, 1, 1);
-		gd_table.heightHint = 364;
-		gd_table.widthHint = 574;
-		table.setLayoutData(gd_table);
-		table.setHeaderVisible(true);
-		table.setLinesVisible(true);
-		
-		TableColumn tblclmnOrderId = new TableColumn(table, SWT.NONE);
-		tblclmnOrderId.setWidth(120);
-		tblclmnOrderId.setText("Order ID");
-		
-		TableColumn tblclmnNewColumn = new TableColumn(table, SWT.NONE);
-		tblclmnNewColumn.setWidth(182);
-		tblclmnNewColumn.setText("Customer Name");
-		
-		TableColumn tblclmnStatus = new TableColumn(table, SWT.NONE);
-		tblclmnStatus.setWidth(122);
-		tblclmnStatus.setText("Status");
-		
-		TableColumn tblclmnLastUpdated = new TableColumn(table, SWT.NONE);
-		tblclmnLastUpdated.setWidth(171);
-		tblclmnLastUpdated.setText("Last Updated");
-		
-		TableItem tableItem = new TableItem(table, SWT.NONE);
-		tableItem.setText("null");
-		
 		Composite composite_1 = new Composite(shlCustomGuitarOrdering, SWT.NONE);
-		fd_composite.bottom = new FormAttachment(composite_1, 0, SWT.BOTTOM);
 		FormData fd_composite_1 = new FormData();
-		fd_composite_1.right = new FormAttachment(100, -10);
-		fd_composite_1.left = new FormAttachment(composite, 6);
+		fd_composite_1.left = new FormAttachment(0, 625);
+		fd_composite_1.right = new FormAttachment(100);
 		fd_composite_1.top = new FormAttachment(0, 10);
 		fd_composite_1.bottom = new FormAttachment(100, -10);
 		composite_1.setLayoutData(fd_composite_1);
@@ -107,20 +76,55 @@ public class StartScreen {
 				System.exit(0);
 			}
 		});
-		btnExit.setBounds(10, 344, 97, 30);
+		btnExit.setBounds(10, 350, 107, 30);
 		btnExit.setText("Exit");
 		
 		Button btnAddOrder = new Button(composite_1, SWT.NONE);
 		btnAddOrder.setText("Add Order");
-		btnAddOrder.setBounds(10, 10, 97, 45);
+		btnAddOrder.setBounds(10, 0, 107, 45);
 		
 		Button btnViewOrder = new Button(composite_1, SWT.NONE);
 		btnViewOrder.setText("View Order");
-		btnViewOrder.setBounds(10, 112, 97, 45);
+		btnViewOrder.setBounds(10, 102, 107, 45);
 		
 		Button btnEditOrder = new Button(composite_1, SWT.NONE);
 		btnEditOrder.setText("Edit Order");
-		btnEditOrder.setBounds(10, 61, 97, 45);
+		btnEditOrder.setBounds(10, 51, 107, 45);
+		
+		Composite composite = new Composite(shlCustomGuitarOrdering, SWT.NONE);
+		TableColumnLayout tcl_composite = new TableColumnLayout();
+		composite.setLayout(tcl_composite);
+		FormData fd_composite = new FormData();
+		fd_composite.left = new FormAttachment(0, 10);
+		fd_composite.right = new FormAttachment(composite_1, -6);
+		fd_composite.top = new FormAttachment(0, 10);
+		fd_composite.bottom = new FormAttachment(100, -10);
+		composite.setLayoutData(fd_composite);
+		
+		TableViewer tableViewer = new TableViewer(composite, SWT.BORDER | SWT.FULL_SELECTION);
+		table = tableViewer.getTable();
+		table.setLinesVisible(true);
+		table.setHeaderVisible(true);
+		
+		TableViewerColumn tableViewerColumn = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tblclmnOrderId = tableViewerColumn.getColumn();
+		tcl_composite.setColumnData(tblclmnOrderId, new ColumnPixelData(95, true, true));
+		tblclmnOrderId.setText("Order ID");
+		
+		TableViewerColumn tableViewerColumn_1 = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tblclmnCustomerName = tableViewerColumn_1.getColumn();
+		tcl_composite.setColumnData(tblclmnCustomerName, new ColumnPixelData(176, true, true));
+		tblclmnCustomerName.setText("Customer Name");
+		
+		TableViewerColumn tableViewerColumn_2 = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tblclmnOrderStatus = tableViewerColumn_2.getColumn();
+		tcl_composite.setColumnData(tblclmnOrderStatus, new ColumnPixelData(123, true, true));
+		tblclmnOrderStatus.setText("Order Status");
+		
+		TableViewerColumn tableViewerColumn_3 = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tblclmnLastUpdated = tableViewerColumn_3.getColumn();
+		tcl_composite.setColumnData(tblclmnLastUpdated, new ColumnPixelData(130, true, true));
+		tblclmnLastUpdated.setText("Last Updated");
 
 	}
 }
