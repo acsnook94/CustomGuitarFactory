@@ -59,145 +59,113 @@ public class AddOrder {
 		shlAddNewOrder.setLayout(new FormLayout());
 		
 		Composite composite = new Composite(shlAddNewOrder, SWT.NONE);
+		composite.setLayout(null);
 		FormData fd_composite = new FormData();
 		fd_composite.top = new FormAttachment(0, 10);
-		fd_composite.left = new FormAttachment(0, 10);
 		fd_composite.right = new FormAttachment(100, -10);
 		composite.setLayoutData(fd_composite);
-		composite.setLayout(new GridLayout(7, false));
 		
 		Label lblNewLabel = new Label(composite, SWT.NONE);
-		lblNewLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
+		lblNewLabel.setBounds(10, 10, 34, 20);
 		lblNewLabel.setText("Type:");
-		new Label(composite, SWT.NONE);
 		
 		Label lblOfStrings = new Label(composite, SWT.NONE);
+		lblOfStrings.setBounds(160, 10, 134, 20);
 		lblOfStrings.setText("# of Strings:");
-		new Label(composite, SWT.NONE);
 		
 		Label lblBodyforn = new Label(composite, SWT.NONE);
+		lblBodyforn.setBounds(339, 10, 139, 20);
 		lblBodyforn.setText("Style:");
-		new Label(composite, SWT.NONE);
 		
 		Label lblMaterial = new Label(composite, SWT.NONE);
-		lblMaterial.setText("Body Wood/Material");
+		lblMaterial.setBounds(527, 10, 151, 20);
+		lblMaterial.setText("Body Wood/Material:");
 		
 		ComboViewer comboViewer = new ComboViewer(composite, SWT.NONE);
 		Combo combo = comboViewer.getCombo();
+		combo.setBounds(10, 35, 106, 28);
 		combo.setItems(new String[] {"Electric", "Acoustic", "Bass"});
-		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		new Label(composite, SWT.NONE);
 		
 		text = new Text(composite, SWT.BORDER);
-		GridData gd_text = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
-		gd_text.widthHint = 85;
-		text.setLayoutData(gd_text);
-		new Label(composite, SWT.NONE);
+		text.setBounds(160, 36, 134, 26);
 		
 		ComboViewer comboViewer_2 = new ComboViewer(composite, SWT.NONE);
 		Combo combo_2 = comboViewer_2.getCombo();
+		combo_2.setBounds(339, 35, 139, 28);
 		combo_2.setItems(new String[] {"Archtop", "Flat-top", "Dreadnaught", "Semi-Hollowbody", "Solid-Body", "Backpacker", "Parlor", "Classical", "Jumbo", "Backpacker"});
-		GridData gd_combo_2 = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
-		gd_combo_2.widthHint = 85;
-		combo_2.setLayoutData(gd_combo_2);
-		new Label(composite, SWT.NONE);
 		
 		ComboViewer comboViewer_3 = new ComboViewer(composite, SWT.NONE);
 		Combo combo_3 = comboViewer_3.getCombo();
+		combo_3.setBounds(527, 35, 134, 28);
 		combo_3.setItems(new String[] {"Maple", "Oak", "Mahogany", "Rosewood", "Spruce", "Agathis", "Basswood", "Alder", "Polycarbonate", "Steel", "Walnut", "Swamp Ash", "Rosewood"});
-		combo_3.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		new Label(composite, SWT.NONE);
-		new Label(composite, SWT.NONE);
-		new Label(composite, SWT.NONE);
-		new Label(composite, SWT.NONE);
-		new Label(composite, SWT.NONE);
-		new Label(composite, SWT.NONE);
-		new Label(composite, SWT.NONE);
 		
 		Label lblShapeform = new Label(composite, SWT.NONE);
+		lblShapeform.setBounds(10, 79, 65, 20);
 		lblShapeform.setText("# of Frets:");
-		new Label(composite, SWT.NONE);
 		
 		Label lblNewLabel_1 = new Label(composite, SWT.NONE);
+		lblNewLabel_1.setBounds(160, 79, 151, 20);
 		lblNewLabel_1.setText("Neck Wood/Material:");
-		new Label(composite, SWT.NONE);
 		
 		Label lblFretboardMaterial = new Label(composite, SWT.NONE);
+		lblFretboardMaterial.setBounds(339, 79, 139, 20);
 		lblFretboardMaterial.setText("Fretboard Material:");
-		new Label(composite, SWT.NONE);
 		
 		Label lblNeckRadius = new Label(composite, SWT.NONE);
+		lblNeckRadius.setBounds(527, 79, 134, 20);
 		lblNeckRadius.setText("Neck Radius:");
 		
 		text_1 = new Text(composite, SWT.BORDER);
-		text_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		new Label(composite, SWT.NONE);
+		text_1.setBounds(10, 105, 106, 26);
 		
 		ComboViewer comboViewer_1 = new ComboViewer(composite, SWT.NONE);
 		Combo combo_1 = comboViewer_1.getCombo();
+		combo_1.setBounds(160, 104, 134, 28);
 		combo_1.setItems(new String[] {"Rosewood", "Maple", "Ebony", "Walnut", "Mahogany", "Canary", "Cocobolo", "Korina", "Bocote", "Koa"});
-		GridData gd_combo_1 = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
-		gd_combo_1.widthHint = 85;
-		combo_1.setLayoutData(gd_combo_1);
-		new Label(composite, SWT.NONE);
 		
 		ComboViewer comboViewer_4 = new ComboViewer(composite, SWT.NONE);
 		Combo combo_4 = comboViewer_4.getCombo();
+		combo_4.setBounds(339, 104, 139, 28);
 		combo_4.setItems(new String[] {"Rosewood", "Maple", "Ebony", "Kingwood", "Canary", "Cocobolo", "Bocote", "Bubinga"});
-		combo_4.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		new Label(composite, SWT.NONE);
 		
 		ComboViewer comboViewer_5 = new ComboViewer(composite, SWT.NONE);
 		Combo combo_5 = comboViewer_5.getCombo();
+		combo_5.setBounds(527, 104, 134, 28);
 		combo_5.setItems(new String[] {"7-1/4\"", "9-1/2\"", "10\"", "12\"", "14\"", "16\"", "20\""});
-		combo_5.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		new Label(composite, SWT.NONE);
-		new Label(composite, SWT.NONE);
-		new Label(composite, SWT.NONE);
-		new Label(composite, SWT.NONE);
-		new Label(composite, SWT.NONE);
-		new Label(composite, SWT.NONE);
-		new Label(composite, SWT.NONE);
 		
 		Label lblColor = new Label(composite, SWT.NONE);
+		lblColor.setBounds(10, 162, 39, 20);
 		lblColor.setText("Color:");
-		new Label(composite, SWT.NONE);
 		
 		Label lblFinishType = new Label(composite, SWT.NONE);
+		lblFinishType.setBounds(160, 162, 134, 20);
 		lblFinishType.setText("Finish Type:");
-		new Label(composite, SWT.NONE);
 		
 		Label lblNewLabel_2 = new Label(composite, SWT.NONE);
+		lblNewLabel_2.setBounds(339, 162, 139, 20);
 		lblNewLabel_2.setText("Tuning Pegs:");
-		new Label(composite, SWT.NONE);
-		new Label(composite, SWT.NONE);
 		
 		text_2 = new Text(composite, SWT.BORDER);
-		text_2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		new Label(composite, SWT.NONE);
+		text_2.setBounds(10, 188, 106, 26);
 		
 		ComboViewer comboViewer_6 = new ComboViewer(composite, SWT.NONE);
 		Combo combo_6 = comboViewer_6.getCombo();
+		combo_6.setBounds(160, 187, 134, 28);
 		combo_6.setItems(new String[] {"Polymer", "Nitrocellulose", "None"});
-		GridData gd_combo_6 = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
-		gd_combo_6.widthHint = 85;
-		combo_6.setLayoutData(gd_combo_6);
-		new Label(composite, SWT.NONE);
 		
 		ComboViewer comboViewer_7 = new ComboViewer(composite, SWT.NONE);
 		Combo combo_7 = comboViewer_7.getCombo();
+		combo_7.setBounds(339, 187, 139, 28);
 		combo_7.setItems(new String[] {"Inline, standard", "2-row, standard", "Inline, locking", "2-row, locking"});
-		combo_7.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		new Label(composite, SWT.NONE);
-		new Label(composite, SWT.NONE);
 		
 		Composite composite_1 = new Composite(shlAddNewOrder, SWT.NONE);
-		fd_composite.bottom = new FormAttachment(100, -141);
+		fd_composite.bottom = new FormAttachment(composite_1, -6);
+		fd_composite.left = new FormAttachment(composite_1, 0, SWT.LEFT);
 		composite_1.setLayout(new GridLayout(1, false));
 		FormData fd_composite_1 = new FormData();
-		fd_composite_1.top = new FormAttachment(composite, 6);
-		fd_composite_1.left = new FormAttachment(0, 10);
 		fd_composite_1.bottom = new FormAttachment(100, -10);
+		fd_composite_1.top = new FormAttachment(0, 252);
+		fd_composite_1.left = new FormAttachment(0, 10);
 		fd_composite_1.right = new FormAttachment(100, -352);
 		composite_1.setLayoutData(fd_composite_1);
 		
@@ -213,9 +181,9 @@ public class AddOrder {
 		Composite composite_2 = new Composite(shlAddNewOrder, SWT.NONE);
 		composite_2.setLayout(null);
 		FormData fd_composite_2 = new FormData();
-		fd_composite_2.right = new FormAttachment(composite, 0, SWT.RIGHT);
-		fd_composite_2.bottom = new FormAttachment(composite_1, 0, SWT.BOTTOM);
+		fd_composite_2.bottom = new FormAttachment(100, -10);
 		fd_composite_2.top = new FormAttachment(composite, 6);
+		fd_composite_2.right = new FormAttachment(100, -10);
 		fd_composite_2.left = new FormAttachment(composite_1, 6);
 		composite_2.setLayoutData(fd_composite_2);
 		
