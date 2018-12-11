@@ -90,14 +90,16 @@ public class AddOrder {
 		
 		text = new Text(composite, SWT.BORDER);
 		GridData gd_text = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
-		gd_text.widthHint = 64;
+		gd_text.widthHint = 85;
 		text.setLayoutData(gd_text);
 		new Label(composite, SWT.NONE);
 		
 		ComboViewer comboViewer_2 = new ComboViewer(composite, SWT.NONE);
 		Combo combo_2 = comboViewer_2.getCombo();
 		combo_2.setItems(new String[] {"Archtop", "Flat-top", "Dreadnaught", "Semi-Hollowbody", "Solid-Body", "Backpacker", "Parlor", "Classical", "Jumbo", "Backpacker"});
-		combo_2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		GridData gd_combo_2 = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
+		gd_combo_2.widthHint = 85;
+		combo_2.setLayoutData(gd_combo_2);
 		new Label(composite, SWT.NONE);
 		
 		ComboViewer comboViewer_3 = new ComboViewer(composite, SWT.NONE);
@@ -134,7 +136,9 @@ public class AddOrder {
 		ComboViewer comboViewer_1 = new ComboViewer(composite, SWT.NONE);
 		Combo combo_1 = comboViewer_1.getCombo();
 		combo_1.setItems(new String[] {"Rosewood", "Maple", "Ebony", "Walnut", "Mahogany", "Canary", "Cocobolo", "Korina", "Bocote", "Koa"});
-		combo_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		GridData gd_combo_1 = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
+		gd_combo_1.widthHint = 85;
+		combo_1.setLayoutData(gd_combo_1);
 		new Label(composite, SWT.NONE);
 		
 		ComboViewer comboViewer_4 = new ComboViewer(composite, SWT.NONE);
@@ -175,7 +179,9 @@ public class AddOrder {
 		ComboViewer comboViewer_6 = new ComboViewer(composite, SWT.NONE);
 		Combo combo_6 = comboViewer_6.getCombo();
 		combo_6.setItems(new String[] {"Polymer", "Nitrocellulose", "None"});
-		combo_6.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		GridData gd_combo_6 = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
+		gd_combo_6.widthHint = 85;
+		combo_6.setLayoutData(gd_combo_6);
 		new Label(composite, SWT.NONE);
 		
 		ComboViewer comboViewer_7 = new ComboViewer(composite, SWT.NONE);
