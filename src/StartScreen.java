@@ -13,8 +13,12 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.internal.win32.OS;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.jface.viewers.TableViewer;
+
+import java.awt.Dialog;
+
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.ColumnPixelData;
@@ -78,7 +82,7 @@ public class StartScreen {
 		fd_composite.left = new FormAttachment(0, 10);
 		
 		Group group = new Group(composite_1, SWT.NONE);
-		group.setBounds(10, -7, 117, 426);
+		group.setBounds(10, -10, 117, 426);
 		
 		Button btnViewOrder = new Button(group, SWT.NONE);
 		btnViewOrder.setLocation(10, 80);
@@ -91,6 +95,12 @@ public class StartScreen {
 		btnEditOrder.setText("Edit Order");
 		
 		Button btnAddOrder = new Button(group, SWT.NONE);
+		btnAddOrder.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+			}
+		});
 		btnAddOrder.setLocation(10, 22);
 		btnAddOrder.setSize(97, 45);
 		btnAddOrder.setText("Add Order");
