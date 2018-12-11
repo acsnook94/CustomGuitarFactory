@@ -18,6 +18,7 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.ColumnPixelData;
+import org.eclipse.swt.widgets.Group;
 
 public class StartScreen {
 
@@ -57,46 +58,53 @@ public class StartScreen {
 	 */
 	protected void createContents() {
 		shlCustomGuitarOrdering = new Shell();
-		shlCustomGuitarOrdering.setSize(770, 447);
+		shlCustomGuitarOrdering.setSize(780, 477);
 		shlCustomGuitarOrdering.setText("Custom Guitar Ordering System");
 		shlCustomGuitarOrdering.setLayout(new FormLayout());
 		
 		Composite composite_1 = new Composite(shlCustomGuitarOrdering, SWT.NONE);
 		FormData fd_composite_1 = new FormData();
-		fd_composite_1.left = new FormAttachment(0, 625);
-		fd_composite_1.right = new FormAttachment(100);
 		fd_composite_1.top = new FormAttachment(0, 10);
 		fd_composite_1.bottom = new FormAttachment(100, -10);
+		fd_composite_1.right = new FormAttachment(100, -8);
 		composite_1.setLayoutData(fd_composite_1);
 		
-		Button btnExit = new Button(composite_1, SWT.NONE);
+		Composite composite = new Composite(shlCustomGuitarOrdering, SWT.NONE);
+		fd_composite_1.left = new FormAttachment(composite, 1);
+		TableColumnLayout tcl_composite = new TableColumnLayout();
+		composite.setLayout(tcl_composite);
+		FormData fd_composite = new FormData();
+		fd_composite.right = new FormAttachment(100, -138);
+		fd_composite.left = new FormAttachment(0, 10);
+		
+		Group group = new Group(composite_1, SWT.NONE);
+		group.setBounds(10, -7, 117, 426);
+		
+		Button btnViewOrder = new Button(group, SWT.NONE);
+		btnViewOrder.setLocation(10, 80);
+		btnViewOrder.setSize(97, 45);
+		btnViewOrder.setText("View Order");
+		
+		Button btnEditOrder = new Button(group, SWT.NONE);
+		btnEditOrder.setLocation(10, 136);
+		btnEditOrder.setSize(97, 45);
+		btnEditOrder.setText("Edit Order");
+		
+		Button btnAddOrder = new Button(group, SWT.NONE);
+		btnAddOrder.setLocation(10, 22);
+		btnAddOrder.setSize(97, 45);
+		btnAddOrder.setText("Add Order");
+		
+		Button btnExit = new Button(group, SWT.NONE);
+		btnExit.setLocation(10, 389);
+		btnExit.setSize(97, 30);
 		btnExit.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				System.exit(0);
 			}
 		});
-		btnExit.setBounds(10, 350, 107, 30);
 		btnExit.setText("Exit");
-		
-		Button btnAddOrder = new Button(composite_1, SWT.NONE);
-		btnAddOrder.setText("Add Order");
-		btnAddOrder.setBounds(10, 0, 107, 45);
-		
-		Button btnViewOrder = new Button(composite_1, SWT.NONE);
-		btnViewOrder.setText("View Order");
-		btnViewOrder.setBounds(10, 102, 107, 45);
-		
-		Button btnEditOrder = new Button(composite_1, SWT.NONE);
-		btnEditOrder.setText("Edit Order");
-		btnEditOrder.setBounds(10, 51, 107, 45);
-		
-		Composite composite = new Composite(shlCustomGuitarOrdering, SWT.NONE);
-		TableColumnLayout tcl_composite = new TableColumnLayout();
-		composite.setLayout(tcl_composite);
-		FormData fd_composite = new FormData();
-		fd_composite.left = new FormAttachment(0, 10);
-		fd_composite.right = new FormAttachment(composite_1, -6);
 		fd_composite.top = new FormAttachment(0, 10);
 		fd_composite.bottom = new FormAttachment(100, -10);
 		composite.setLayoutData(fd_composite);
