@@ -86,12 +86,12 @@ public class StartScreen {
 		group.setBounds(10, -10, 117, 426);
 		
 		Button btnViewOrder = new Button(group, SWT.NONE);
-		btnViewOrder.setLocation(10, 80);
+		btnViewOrder.setLocation(10, 20);
 		btnViewOrder.setSize(97, 45);
 		btnViewOrder.setText("View Order");
 		
 		Button btnEditOrder = new Button(group, SWT.NONE);
-		btnEditOrder.setLocation(10, 136);
+		btnEditOrder.setLocation(10, 122);
 		btnEditOrder.setSize(97, 45);
 		btnEditOrder.setText("Edit Order");
 		
@@ -103,7 +103,7 @@ public class StartScreen {
 				addOrder.open();
 			}
 		});
-		btnAddOrder.setLocation(10, 22);
+		btnAddOrder.setLocation(10, 231);
 		btnAddOrder.setSize(97, 45);
 		btnAddOrder.setText("Add Order");
 		
@@ -117,6 +117,17 @@ public class StartScreen {
 			}
 		});
 		btnExit.setText("Exit");
+		
+		Button btnUpdateOrder = new Button(group, SWT.NONE);
+		btnUpdateOrder.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				UpdateOrder uoOrder = new UpdateOrder(shlCustomGuitarOrdering, 0);
+				uoOrder.open();
+			}
+		});
+		btnUpdateOrder.setText("Update Status");
+		btnUpdateOrder.setBounds(10, 71, 97, 45);
 		fd_composite.top = new FormAttachment(0, 10);
 		fd_composite.bottom = new FormAttachment(100, -10);
 		composite.setLayoutData(fd_composite);
