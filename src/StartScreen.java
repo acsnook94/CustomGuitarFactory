@@ -52,7 +52,7 @@ public class StartScreen {
 	 */
 	protected void createContents() {
 		shlCustomGuitarOrdering = new Shell();
-		shlCustomGuitarOrdering.setSize(798, 447);
+		shlCustomGuitarOrdering.setSize(770, 447);
 		shlCustomGuitarOrdering.setText("Custom Guitar Ordering System");
 		shlCustomGuitarOrdering.setLayout(new FormLayout());
 		
@@ -89,46 +89,7 @@ public class StartScreen {
 		tblclmnLastUpdated.setText("Last Updated");
 		
 		TableItem tableItem = new TableItem(table, SWT.NONE);
-		tableItem.setText("New TableItem");
-		
-		TableItem tableItem_1 = new TableItem(table, SWT.NONE);
-		tableItem_1.setText("New TableItem");
-		
-		TableItem tableItem_2 = new TableItem(table, SWT.NONE);
-		tableItem_2.setText("New TableItem");
-		
-		TableItem tableItem_3 = new TableItem(table, SWT.NONE);
-		tableItem_3.setText("New TableItem");
-		
-		TableItem tableItem_4 = new TableItem(table, SWT.NONE);
-		tableItem_4.setText("New TableItem");
-		
-		TableItem tableItem_5 = new TableItem(table, SWT.NONE);
-		tableItem_5.setText("New TableItem");
-		
-		TableItem tableItem_6 = new TableItem(table, SWT.NONE);
-		tableItem_6.setText("New TableItem");
-		
-		TableItem tableItem_7 = new TableItem(table, SWT.NONE);
-		tableItem_7.setText("New TableItem");
-		
-		TableItem tableItem_8 = new TableItem(table, SWT.NONE);
-		tableItem_8.setText("New TableItem");
-		
-		TableItem tableItem_9 = new TableItem(table, SWT.NONE);
-		tableItem_9.setText("New TableItem");
-		
-		TableItem tableItem_10 = new TableItem(table, SWT.NONE);
-		tableItem_10.setText("New TableItem");
-		
-		TableItem tableItem_11 = new TableItem(table, SWT.NONE);
-		tableItem_11.setText("New TableItem");
-		
-		TableItem tableItem_12 = new TableItem(table, SWT.NONE);
-		tableItem_12.setText("New TableItem");
-		
-		TableItem tableItem_13 = new TableItem(table, SWT.NONE);
-		tableItem_13.setText("New TableItem");
+		tableItem.setText("null");
 		
 		Composite composite_1 = new Composite(shlCustomGuitarOrdering, SWT.NONE);
 		fd_composite.bottom = new FormAttachment(composite_1, 0, SWT.BOTTOM);
@@ -143,10 +104,23 @@ public class StartScreen {
 		btnExit.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				System.exit(0);
 			}
 		});
-		btnExit.setBounds(45, 344, 90, 30);
+		btnExit.setBounds(10, 344, 97, 30);
 		btnExit.setText("Exit");
+		
+		Button btnAddOrder = new Button(composite_1, SWT.NONE);
+		btnAddOrder.setText("Add Order");
+		btnAddOrder.setBounds(10, 10, 97, 45);
+		
+		Button btnViewOrder = new Button(composite_1, SWT.NONE);
+		btnViewOrder.setText("View Order");
+		btnViewOrder.setBounds(10, 112, 97, 45);
+		
+		Button btnEditOrder = new Button(composite_1, SWT.NONE);
+		btnEditOrder.setText("Edit Order");
+		btnEditOrder.setBounds(10, 61, 97, 45);
 
 	}
 }
