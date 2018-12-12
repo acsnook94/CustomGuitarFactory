@@ -54,11 +54,28 @@ public class AddOrder {
 	
 	//Methods (Non-GUI)
 	/**
-	 * Create an order for new customer and store all the necessary fields after user clicks "btnSubmit"
+	 * Create a new CustOrder object and store all the necessary fields (after user clicks "btnSubmit").
 	 */
 	private void AddNewOrder() {
 		CustOrder newOrderSet = new CustOrder();
-		MessageBox mb = new MessageBox(shlAddNewOrder);
+		MessageBox err = new MessageBox(shlAddNewOrder);
+		
+		try {
+			newOrderSet.setNumFrets(Integer.parseInt(txtNumFrets.getText()));
+		}
+		catch(Exception ex){
+			err.setMessage("You must enter a numeric amount for frets.");
+			err.open();
+			//return;
+		}
+		
+		try {
+			newOrderSet.setNumStrings(Integer.parseInt(txtNumStrings.getText()));
+		}
+		catch(Exception ex) {
+			err.setMessage("You must enter a numeric amount for strings.");
+			err.open();
+		}
 		
 		newOrderSet.setBodyMaterial(cboVwrBodyMaterial.getCombo().getText());
 		newOrderSet.setColor(txtColor.getText());
@@ -69,25 +86,6 @@ public class AddOrder {
 		newOrderSet.setStyle(cboVwrStyle.getCombo().getText());
 		newOrderSet.setTuningPegs(cboVwrTuningPegs.getCombo().getText());
 		newOrderSet.setType(cboVwrType.getCombo().getText());
-		
-		try {
-			newOrderSet.setNumFrets(Integer.parseInt(txtNumFrets.getText()));
-		}
-		catch(Exception ex){
-			mb.setMessage("You must enter a numeric amount for frets.");
-			mb.open();
-			//return;
-		}
-		
-		try {
-			newOrderSet.setNumStrings(Integer.parseInt(txtNumStrings.getText()));
-		}
-		catch(Exception ex) {
-			mb.setMessage("You must enter a numeric amount for strings.");
-			mb.open();
-		}
-		
-		
 		
 		
 		

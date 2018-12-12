@@ -8,6 +8,7 @@ public class CustOrder {
 	
 	//Order Fields
 	private int orderId;
+	private String custName;
 	private String type;
 	private int numStrings;
 	private String style;
@@ -19,6 +20,7 @@ public class CustOrder {
 	private String color;
 	private String finishType;
 	private String tuningPegs;
+	private String specInstr;
 //	private CustOrder next;	//Reference to next Order in linked list
 	
 	//Constructor
@@ -112,6 +114,30 @@ public class CustOrder {
 
 	public void setTuningPegs(String tuningPegs) {
 		this.tuningPegs = tuningPegs;
+	}
+
+	public int getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
+
+	public String getCustName() {
+		return custName;
+	}
+
+	public void setCustName(String custName) {
+		this.custName = custName;
+	}
+
+	public String getSpecInstr() {
+		return specInstr;
+	}
+
+	public void setSpecInstr(String specInstr) {
+		this.specInstr = specInstr;
 	}
 
 //	public CustOrder getNext() {
