@@ -19,18 +19,20 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.Viewer;
-import java.util.LinkedList;
-import java.util.List;
 
+/**
+ * This class is used to display a window containing an order queue table, along with buttons which allow the user 
+ * to view, edit, and add new orders.
+ * 
+ * @author Andrew Snook
+ */
 public class MainScreen {
 	//Class Fields
 	protected Shell shlCustomGuitarOrdering;
 	private Table tblOrder;
 	
 	//Non-GUI Methods
-//	private void refreshQueue() {
-//		
-//	}
+	//TODO
 	
 	//GUI Methods
 	/**
@@ -154,7 +156,6 @@ public class MainScreen {
 				tblVwrOrder.refresh();
 			}
 		});
-
 	}
 	
 	/**
@@ -166,8 +167,10 @@ public class MainScreen {
 		public Object[] getElements(Object inputElement) {
 			return Startup.orderQueue.toArray();
 		}
+		
 		public void dispose() {
 		}
+		
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		}
 	}

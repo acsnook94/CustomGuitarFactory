@@ -15,6 +15,10 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
+/**
+ * This class is used to display a window which allows the user to update the status of an existing order.
+ * @author Andrew Snook
+ */
 public class UpdateOrder extends Dialog {
 	//Class Fields
 	protected Object result;
@@ -88,6 +92,6 @@ public class UpdateOrder extends Dialog {
 		gd_btnSaveStatus.widthHint = 98;
 		btnSaveStatus.setLayoutData(gd_btnSaveStatus);
 		btnSaveStatus.setText("Save");
-
 	}
+	
 }

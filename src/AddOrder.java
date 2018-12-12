@@ -10,13 +10,18 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.layout.GridData;
-import java.util.Date;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import java.util.Date;
 
+/**
+ * This class is used to display a window which will allow the user to add a new customized guitar order (for customer)
+ * 
+ * @author Andrew Snook
+ */
 public class AddOrder {
 	//Class Fields
 	protected Shell shlAddNewOrder;
@@ -91,7 +96,6 @@ public class AddOrder {
 		newOrderSet.setLastUpdated(new Date());
 		
 		Startup.orderQueue.add(newOrderSet);	//Push the new CustOrder to the ordering queue
-		
 	}
 	
 	//GUI Methods
@@ -259,7 +263,6 @@ public class AddOrder {
 		btnSubmit.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				//TODO
 				AddNewOrder();
 			}
 		});
