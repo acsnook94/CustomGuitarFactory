@@ -10,16 +10,11 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.layout.GridData;
-
-import java.awt.Dialog;
-
-import org.eclipse.jface.viewers.ComboBoxViewerCellEditor;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.internal.ole.win32.COM;
 
 public class AddOrder {
 
@@ -86,6 +81,9 @@ public class AddOrder {
 		newOrderSet.setStyle(cboVwrStyle.getCombo().getText());
 		newOrderSet.setTuningPegs(cboVwrTuningPegs.getCombo().getText());
 		newOrderSet.setType(cboVwrType.getCombo().getText());
+		newOrderSet.setSpecInstr(txtSpecInstr.getText());
+		newOrderSet.setCustName(txtCustName.getText());
+		newOrderSet.setOrderStatus("Pending");
 		
 		
 		
