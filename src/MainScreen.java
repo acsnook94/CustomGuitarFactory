@@ -13,13 +13,14 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.layout.TableColumnLayout;
-import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.ColumnPixelData;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.Viewer;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MainScreen {
 	//Class Fields
@@ -129,24 +130,21 @@ public class MainScreen {
 		tblOrder.setHeaderVisible(true);
 		tblVwrOrder.setContentProvider(new CustOrderContentProvider());
 		tblVwrOrder.setLabelProvider(new CustOrderLabelProvider());
+		tblVwrOrder.setInput(Startup.orderQueue.toArray());
 		
-		TableViewerColumn tableViewerColumn = new TableViewerColumn(tblVwrOrder, SWT.NONE);
-		TableColumn tblclmnOrderId = tableViewerColumn.getColumn();
+		TableColumn tblclmnOrderId = new TableColumn(tblOrder, SWT.LEFT);
 		tcl_composite_1.setColumnData(tblclmnOrderId, new ColumnPixelData(95, true, true));
 		tblclmnOrderId.setText("Order ID");
 		
-		TableViewerColumn tableViewerColumn_1 = new TableViewerColumn(tblVwrOrder, SWT.NONE);
-		TableColumn tblclmnCustomerName = tableViewerColumn_1.getColumn();
+		TableColumn tblclmnCustomerName = new TableColumn(tblOrder, SWT.LEFT);
 		tcl_composite_1.setColumnData(tblclmnCustomerName, new ColumnPixelData(176, true, true));
 		tblclmnCustomerName.setText("Customer Name");
 		
-		TableViewerColumn tableViewerColumn_2 = new TableViewerColumn(tblVwrOrder, SWT.NONE);
-		TableColumn tblclmnOrderStatus = tableViewerColumn_2.getColumn();
+		TableColumn tblclmnOrderStatus = new TableColumn(tblOrder, SWT.LEFT);
 		tcl_composite_1.setColumnData(tblclmnOrderStatus, new ColumnPixelData(123, true, true));
 		tblclmnOrderStatus.setText("Order Status");
 		
-		TableViewerColumn tableViewerColumn_3 = new TableViewerColumn(tblVwrOrder, SWT.NONE);
-		TableColumn tblclmnLastUpdated = tableViewerColumn_3.getColumn();
+		TableColumn tblclmnLastUpdated = new TableColumn(tblOrder, SWT.LEFT);
 		tcl_composite_1.setColumnData(tblclmnLastUpdated, new ColumnPixelData(130, true, true));
 		tblclmnLastUpdated.setText("Last Updated");
 		
