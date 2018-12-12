@@ -43,6 +43,7 @@ public class AddOrder {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
 		try {
 			AddOrder window = new AddOrder();
 			window.open();
@@ -52,14 +53,44 @@ public class AddOrder {
 	}
 	
 	//Methods (Non-GUI)
+	/**
+	 * Create an order for new customer and store all the necessary fields after user clicks "btnSubmit"
+	 */
 	private void AddNewOrder() {
-		//TODO
 		CustOrder newOrderSet = new CustOrder();
+		MessageBox mb = new MessageBox(shlAddNewOrder);
 		
 		newOrderSet.setBodyMaterial(cboVwrBodyMaterial.getCombo().getText());
-		MessageBox mb = new MessageBox(shlAddNewOrder);
-		mb.setMessage(newOrderSet.getBodyMaterial());
-		mb.open();
+		newOrderSet.setColor(txtColor.getText());
+		newOrderSet.setFinishType(cboVwrFinishType.getCombo().getText());
+		newOrderSet.setFretboardMaterial(cboVwrFretboardMaterial.getCombo().getText());
+		newOrderSet.setNeckMaterial(cboVwrNeckMaterial.getCombo().getText());
+		newOrderSet.setNeckRadius(cboVwrNeckRadius.getCombo().getText());
+		newOrderSet.setStyle(cboVwrStyle.getCombo().getText());
+		newOrderSet.setTuningPegs(cboVwrTuningPegs.getCombo().getText());
+		newOrderSet.setType(cboVwrType.getCombo().getText());
+		
+		try {
+			newOrderSet.setNumFrets(Integer.parseInt(txtNumFrets.getText()));
+		}
+		catch(Exception ex){
+			mb.setMessage("You must enter a numeric amount for frets.");
+			mb.open();
+			//return;
+		}
+		
+		try {
+			newOrderSet.setNumStrings(Integer.parseInt(txtNumStrings.getText()));
+		}
+		catch(Exception ex) {
+			mb.setMessage("You must enter a numeric amount for strings.");
+			mb.open();
+		}
+		
+		
+		
+		
+		
 	}
 	
 	//GUI Methods
@@ -243,7 +274,6 @@ public class AddOrder {
 		});
 		btnCancel.setBounds(206, 73, 120, 42);
 		btnCancel.setText("Cancel");
-
 	}
 		
 	//ComboViewer getters/setters
