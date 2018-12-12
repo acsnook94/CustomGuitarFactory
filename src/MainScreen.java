@@ -12,9 +12,6 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.jface.viewers.TableViewer;
-
-import javax.print.attribute.standard.RequestingUserName;
-
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.ColumnPixelData;
@@ -130,6 +127,8 @@ public class MainScreen {
 		tblOrder = tblVwrOrder.getTable();
 		tblOrder.setLinesVisible(true);
 		tblOrder.setHeaderVisible(true);
+		tblVwrOrder.setContentProvider(new CustOrderContentProvider());
+		tblVwrOrder.setLabelProvider(new CustOrderLabelProvider());
 		
 		TableViewerColumn tableViewerColumn = new TableViewerColumn(tblVwrOrder, SWT.NONE);
 		TableColumn tblclmnOrderId = tableViewerColumn.getColumn();
@@ -150,8 +149,6 @@ public class MainScreen {
 		TableColumn tblclmnLastUpdated = tableViewerColumn_3.getColumn();
 		tcl_composite_1.setColumnData(tblclmnLastUpdated, new ColumnPixelData(130, true, true));
 		tblclmnLastUpdated.setText("Last Updated");
-		tblVwrOrder.setContentProvider(new CustOrderContentProvider());
-		tblVwrOrder.setInput(Startup.orderQueue);
 		
 		btnRefresh.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -162,12 +159,12 @@ public class MainScreen {
 
 	}
 	
+	/**
+	 * Used to provide data to the order queue table
+	 * @author Andrew Snook
+	 */
 	private static class CustOrderContentProvider implements IStructuredContentProvider {
-		/**
-		 * Used to provide data to the order queue table
-		 * 
-		 * @author Andrew Snook
-		 */
+		
 		public Object[] getElements(Object inputElement) {
 			return Startup.orderQueue.toArray();
 		}
@@ -177,32 +174,33 @@ public class MainScreen {
 		}
 	}
 	
+	/**
+	 * Used to determine the fields displayed by each table column
+	 * @author Andrew Snook
+	 */
 	private static class CustOrderLabelProvider implements ITableLabelProvider{
 		@Override
-		public void addListener(ILabelProviderListener arg0) {
-			// TODO Auto-generated method stub
-			
+		public void addListener(ILabelProviderListener listener) {
 		}
+		
 		@Override
 		public void dispose() {
-			// TODO Auto-generated method stub
-			
 		}
+		
 		@Override
-		public boolean isLabelProperty(Object arg0, String arg1) {
-			// TODO Auto-generated method stub
+		public boolean isLabelProperty(Object element, String property) {
 			return false;
 		}
+		
 		@Override
-		public void removeListener(ILabelProviderListener arg0) {
-			// TODO Auto-generated method stub
-			
+		public void removeListener(ILabelProviderListener listener) {
 		}
+		
 		@Override
-		public Image getColumnImage(Object arg0, int arg1) {
-			// TODO Auto-generated method stub
+		public Image getColumnImage(Object element, int columnIndex) {
 			return null;
 		}
+		
 		@Override
 		public String getColumnText(Object element, int columnIndex) {
 			CustOrder co = (CustOrder) element;
@@ -214,8 +212,10 @@ public class MainScreen {
 			case 2:
 				return co.getOrderStatus();
 			case 3:
-				return 
+				return co.getLastUpdated().toString();
 			}
+			
+			return "";
 		}
 	}
 	

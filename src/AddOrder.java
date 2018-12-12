@@ -10,6 +10,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.layout.GridData;
+import java.util.Date;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Button;
@@ -55,6 +56,7 @@ public class AddOrder {
 		CustOrder newOrderSet = new CustOrder();
 		MessageBox err = new MessageBox(shlAddNewOrder);
 		
+		//Set user-set numerical fields first (may fail due to invalid input)
 		try {
 			newOrderSet.setNumFrets(Integer.parseInt(txtNumFrets.getText()));
 		}
@@ -72,6 +74,7 @@ public class AddOrder {
 			err.open();
 		}
 		
+		//Set all other order fields
 		newOrderSet.setBodyMaterial(cboVwrBodyMaterial.getCombo().getText());
 		newOrderSet.setColor(txtColor.getText());
 		newOrderSet.setFinishType(cboVwrFinishType.getCombo().getText());
@@ -84,6 +87,8 @@ public class AddOrder {
 		newOrderSet.setSpecInstr(txtSpecInstr.getText());
 		newOrderSet.setCustName(txtCustName.getText());
 		newOrderSet.setOrderStatus("Pending");
+		newOrderSet.setOrderId(Startup.orderQueue.size() + 1);
+		newOrderSet.setLastUpdated(new Date());
 		
 		Startup.orderQueue.add(newOrderSet);	//Push the new CustOrder to the ordering queue
 		
