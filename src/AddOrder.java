@@ -17,7 +17,7 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
 public class AddOrder {
-
+	//Class Fields
 	protected Shell shlAddNewOrder;
 	private Text txtNumStrings;
 	private Text txtNumFrets;
@@ -38,7 +38,6 @@ public class AddOrder {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
 		try {
 			AddOrder window = new AddOrder();
 			window.open();
@@ -50,6 +49,7 @@ public class AddOrder {
 	//Methods (Non-GUI)
 	/**
 	 * Create a new CustOrder object and store all the necessary fields (after user clicks "btnSubmit").
+	 * The CustOrder is then pushed to the ordering queue.
 	 */
 	private void AddNewOrder() {
 		CustOrder newOrderSet = new CustOrder();

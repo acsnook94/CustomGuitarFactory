@@ -7,7 +7,6 @@ import java.util.Queue;
  * @author Andrew Snook
  */
 public class Startup {
-
 	//Will hold all orders (instances of CustOrder)
 	protected static Queue<CustOrder> orderQueue;
 	

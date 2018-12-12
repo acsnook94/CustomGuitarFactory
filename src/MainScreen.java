@@ -15,11 +15,18 @@ import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.ColumnPixelData;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.jface.viewers.IStructuredContentProvider;
+import org.eclipse.jface.viewers.Viewer;
 
 public class MainScreen {
-
+	//Class Fields
 	protected Shell shlCustomGuitarOrdering;
 	private Table tblOrder;
+	
+	//Non-GUI Methods
+//	private void refreshQueue() {
+//		
+//	}
 	
 	//GUI Methods
 	/**
@@ -39,6 +46,7 @@ public class MainScreen {
 
 	/**
 	 * Create contents of the window.
+	 * @wbp.parser.entryPoint
 	 */
 	protected void createContents() {
 		shlCustomGuitarOrdering = new Shell();
@@ -64,10 +72,10 @@ public class MainScreen {
 		Group grpButtons = new Group(composite_0, SWT.NONE);
 		grpButtons.setBounds(10, -10, 117, 426);
 		
-		Button btnViewOrder = new Button(grpButtons, SWT.NONE);
-		btnViewOrder.setLocation(10, 20);
-		btnViewOrder.setSize(97, 45);
-		btnViewOrder.setText("View Order");
+		Button btnRefresh = new Button(grpButtons, SWT.NONE);
+		btnRefresh.setLocation(10, 20);
+		btnRefresh.setSize(97, 45);
+		btnRefresh.setText("Refresh");
 		
 		Button btnEditOrder = new Button(grpButtons, SWT.NONE);
 		btnEditOrder.setLocation(10, 122);
@@ -135,6 +143,26 @@ public class MainScreen {
 		TableColumn tblclmnLastUpdated = tableViewerColumn_3.getColumn();
 		tcl_composite_1.setColumnData(tblclmnLastUpdated, new ColumnPixelData(130, true, true));
 		tblclmnLastUpdated.setText("Last Updated");
+		tblVwrOrder.setContentProvider(new CustOrderContentProvider());
+		tblVwrOrder.setInput(Startup.orderQueue);
 
 	}
+	
+	/**
+	 * Used to provide data to the order queue table
+	 * 
+	 * @author Andrew Snook
+	 */
+//	class CustOrderContentProvider implements IStructuredContentProvider{
+//
+//		@Override
+//		public Object[] getElements(Object arg0) {
+//			// TODO Auto-generated method stub
+//			return Startup.orderQueue.toArray();
+//		}
+//		
+//	}
+	
 }
+
+

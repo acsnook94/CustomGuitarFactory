@@ -5,7 +5,6 @@
  * @author Andrew Snook
  */
 public class CustOrder {
-	
 	//Order Fields
 	private int orderId;
 	private String custName;

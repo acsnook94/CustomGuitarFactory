@@ -16,7 +16,7 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
 public class UpdateOrder extends Dialog {
-
+	//Class Fields
 	protected Object result;
 	protected Shell shlUpdateOrderStatus;
 
