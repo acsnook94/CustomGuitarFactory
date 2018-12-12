@@ -21,6 +21,7 @@ public class CustOrder {
 	private String finishType;
 	private String tuningPegs;
 	private String specInstr;
+	private String orderStatus;
 //	private CustOrder next;	//Reference to next Order in linked list
 	
 	//Constructor
@@ -138,6 +139,14 @@ public class CustOrder {
 
 	public void setSpecInstr(String specInstr) {
 		this.specInstr = specInstr;
+	}
+
+	public String getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
 	}
 
 //	public CustOrder getNext() {
