@@ -10,12 +10,18 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.jface.viewers.TableViewer;
+
+import javax.print.attribute.standard.RequestingUserName;
+
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.ColumnPixelData;
+import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
+import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.Viewer;
 
 public class MainScreen {
@@ -73,6 +79,7 @@ public class MainScreen {
 		grpButtons.setBounds(10, -10, 117, 426);
 		
 		Button btnRefresh = new Button(grpButtons, SWT.NONE);
+		
 		btnRefresh.setLocation(10, 20);
 		btnRefresh.setSize(97, 45);
 		btnRefresh.setText("Refresh");
@@ -145,23 +152,72 @@ public class MainScreen {
 		tblclmnLastUpdated.setText("Last Updated");
 		tblVwrOrder.setContentProvider(new CustOrderContentProvider());
 		tblVwrOrder.setInput(Startup.orderQueue);
+		
+		btnRefresh.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				tblVwrOrder.refresh();
+			}
+		});
 
 	}
 	
-	/**
-	 * Used to provide data to the order queue table
-	 * 
-	 * @author Andrew Snook
-	 */
-//	class CustOrderContentProvider implements IStructuredContentProvider{
-//
-//		@Override
-//		public Object[] getElements(Object arg0) {
-//			// TODO Auto-generated method stub
-//			return Startup.orderQueue.toArray();
-//		}
-//		
-//	}
+	private static class CustOrderContentProvider implements IStructuredContentProvider {
+		/**
+		 * Used to provide data to the order queue table
+		 * 
+		 * @author Andrew Snook
+		 */
+		public Object[] getElements(Object inputElement) {
+			return Startup.orderQueue.toArray();
+		}
+		public void dispose() {
+		}
+		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+		}
+	}
+	
+	private static class CustOrderLabelProvider implements ITableLabelProvider{
+		@Override
+		public void addListener(ILabelProviderListener arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		@Override
+		public void dispose() {
+			// TODO Auto-generated method stub
+			
+		}
+		@Override
+		public boolean isLabelProperty(Object arg0, String arg1) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+		@Override
+		public void removeListener(ILabelProviderListener arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		@Override
+		public Image getColumnImage(Object arg0, int arg1) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		@Override
+		public String getColumnText(Object element, int columnIndex) {
+			CustOrder co = (CustOrder) element;
+			switch (columnIndex) {
+			case 0:
+				return Integer.toString(co.getOrderId());
+			case 1:
+				return co.getCustName();
+			case 2:
+				return co.getOrderStatus();
+			case 3:
+				return 
+			}
+		}
+	}
 	
 }
 

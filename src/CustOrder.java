@@ -1,3 +1,4 @@
+import java.util.Date;
 
 /**
  * This class represents a single customer order from a factory that creates custom-built guitars
@@ -21,6 +22,7 @@ public class CustOrder {
 	private String tuningPegs;
 	private String specInstr;
 	private String orderStatus;
+	private Date lastUpdated;
 //	private CustOrder next;	//Reference to next Order in linked list
 	
 	//Constructor
@@ -147,6 +149,14 @@ public class CustOrder {
 	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
 	}
+	
+	public Date getLastUpdated() {
+		return lastUpdated;
+	}
+
+	public void setLastUpdated(Date lastUpdated) {
+		this.lastUpdated = lastUpdated;
+	}
 
 //	public CustOrder getNext() {
 //		return next;
@@ -155,7 +165,7 @@ public class CustOrder {
 //	public void setNext(CustOrder next) {
 //		this.next = next;
 //	}
-	
+
 	@Override
 	public String toString() {
 		return "CustOrder [orderId=" + orderId + ", custName=" + custName + ", type=" + type + ", numStrings="
