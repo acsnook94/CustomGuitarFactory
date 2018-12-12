@@ -157,4 +157,13 @@ public class CustOrder {
 //		this.next = next;
 //	}
 	
+	@Override
+	public String toString() {
+		return "CustOrder [orderId=" + orderId + ", custName=" + custName + ", type=" + type + ", numStrings="
+				+ numStrings + ", style=" + style + ", bodyMaterial=" + bodyMaterial + ", numFrets=" + numFrets
+				+ ", neckMaterial=" + neckMaterial + ", fretboardMaterial=" + fretboardMaterial + ", neckRadius="
+				+ neckRadius + ", color=" + color + ", finishType=" + finishType + ", tuningPegs=" + tuningPegs
+				+ ", specInstr=" + specInstr + ", orderStatus=" + orderStatus + "]";
+	}
+	
 }

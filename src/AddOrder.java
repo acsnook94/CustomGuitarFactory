@@ -85,7 +85,7 @@ public class AddOrder {
 		newOrderSet.setCustName(txtCustName.getText());
 		newOrderSet.setOrderStatus("Pending");
 		
-		
+		Startup.orderQueue.add(newOrderSet);	//Push the new CustOrder to the ordering queue
 		
 	}
 	

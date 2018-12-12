@@ -8,13 +8,16 @@ import java.util.Queue;
  */
 public class Startup {
 
+	//Will hold all orders (instances of CustOrder)
+	protected static Queue<CustOrder> orderQueue;
+	
 	/**
 	 * Launch the application.
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		
-		Queue<CustOrder> orderQueue = new LinkedList<>();
+		orderQueue = new LinkedList<>();
 		
 		try {
 			MainScreen window = new MainScreen();
