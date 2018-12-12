@@ -7,6 +7,7 @@
 public class CustOrder {
 	
 	//Order Fields
+	private int orderId;
 	private String type;
 	private int numStrings;
 	private String style;
@@ -18,7 +19,7 @@ public class CustOrder {
 	private String color;
 	private String finishType;
 	private String tuningPegs;
-	private CustOrder next;	//Reference to next Order in linked list
+//	private CustOrder next;	//Reference to next Order in linked list
 	
 	//Constructor
 	public CustOrder() {
@@ -113,12 +114,12 @@ public class CustOrder {
 		this.tuningPegs = tuningPegs;
 	}
 
-	public CustOrder getNext() {
-		return next;
-	}
-
-	public void setNext(CustOrder next) {
-		this.next = next;
-	}
+//	public CustOrder getNext() {
+//		return next;
+//	}
+//
+//	public void setNext(CustOrder next) {
+//		this.next = next;
+//	}
 	
 }

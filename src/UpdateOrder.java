@@ -56,38 +56,38 @@ public class UpdateOrder extends Dialog {
 		shlUpdateOrderStatus.setText("Update Order Status");
 		shlUpdateOrderStatus.setLayout(new FormLayout());
 		
-		Composite composite = new Composite(shlUpdateOrderStatus, SWT.NONE);
-		FormData fd_composite = new FormData();
-		fd_composite.bottom = new FormAttachment(0, 179);
-		fd_composite.right = new FormAttachment(0, 434);
-		fd_composite.top = new FormAttachment(0, 10);
-		fd_composite.left = new FormAttachment(0, 10);
-		composite.setLayoutData(fd_composite);
-		composite.setLayout(new GridLayout(1, false));
-		new Label(composite, SWT.NONE);
+		Composite composite_0 = new Composite(shlUpdateOrderStatus, SWT.NONE);
+		FormData fd_composite_0 = new FormData();
+		fd_composite_0.bottom = new FormAttachment(0, 179);
+		fd_composite_0.right = new FormAttachment(0, 434);
+		fd_composite_0.top = new FormAttachment(0, 10);
+		fd_composite_0.left = new FormAttachment(0, 10);
+		composite_0.setLayoutData(fd_composite_0);
+		composite_0.setLayout(new GridLayout(1, false));
+		new Label(composite_0, SWT.NONE);
 		
-		Label lblNewLabel = new Label(composite, SWT.NONE);
-		lblNewLabel.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-		lblNewLabel.setText("Please choose new order status:");
+		Label lblNewStatus = new Label(composite_0, SWT.NONE);
+		lblNewStatus.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+		lblNewStatus.setText("Please choose new order status:");
 		
-		ComboViewer comboViewer = new ComboViewer(composite, SWT.NONE);
-		Combo combo = comboViewer.getCombo();
-		combo.setItems(new String[] {"Pending", "In Production", "Complete", "Shipped", "Cancelled"});
-		GridData gd_combo = new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1);
-		gd_combo.widthHint = 305;
-		combo.setLayoutData(gd_combo);
-		new Label(composite, SWT.NONE);
+		ComboViewer cboVwrNewStatus = new ComboViewer(composite_0, SWT.NONE);
+		Combo cboNewStatus = cboVwrNewStatus.getCombo();
+		cboNewStatus.setItems(new String[] {"Pending", "In Production", "Complete", "Shipped", "Cancelled"});
+		GridData gd_cboNewStatus = new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1);
+		gd_cboNewStatus.widthHint = 305;
+		cboNewStatus.setLayoutData(gd_cboNewStatus);
+		new Label(composite_0, SWT.NONE);
 		
-		Button btnNewButton = new Button(composite, SWT.NONE);
-		btnNewButton.addSelectionListener(new SelectionAdapter() {
+		Button btnSaveStatus = new Button(composite_0, SWT.NONE);
+		btnSaveStatus.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 			}
 		});
-		GridData gd_btnNewButton = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
-		gd_btnNewButton.widthHint = 98;
-		btnNewButton.setLayoutData(gd_btnNewButton);
-		btnNewButton.setText("Save");
+		GridData gd_btnSaveStatus = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
+		gd_btnSaveStatus.widthHint = 98;
+		btnSaveStatus.setLayoutData(gd_btnSaveStatus);
+		btnSaveStatus.setText("Save");
 
 	}
 }
