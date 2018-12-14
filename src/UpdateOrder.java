@@ -106,6 +106,7 @@ public class UpdateOrder extends Dialog {
 				Startup.window.getTblVwrOrder().refresh();			
 			}
 		});
+		
 		GridData gd_btnSaveStatus = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
 		gd_btnSaveStatus.widthHint = 98;
 		btnSaveStatus.setLayoutData(gd_btnSaveStatus);

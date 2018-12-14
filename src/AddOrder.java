@@ -40,96 +40,6 @@ public class AddOrder {
 	private ComboViewer cboVwrTuningPegs;
 	protected static boolean editMode;
 	protected static CustOrder curr;
-
-	/**
-	 * Launch the application.
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		try {
-			AddOrder window = new AddOrder();
-			window.open();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	//Methods (Non-GUI)
-	/**
-	 * Create a new CustOrder object and store all the necessary fields (after user clicks "btnSubmit").
-	 * The CustOrder is then pushed to the ordering queue.
-	 */
-	private void AddNewOrder() {
-		CustOrder newOrderSet = new CustOrder();
-		MessageBox err;
-		boolean error = false;
-		
-		//Set user-set numerical fields first (may fail due to invalid input)
-		try {
-			newOrderSet.setNumFrets(Integer.parseInt(txtNumFrets.getText()));
-		}
-		catch(Exception ex){
-			error = true;
-			err = new MessageBox(shlAddNewOrder);
-			err.setMessage("You must enter a numeric amount for frets.");
-			err.open();
-			//return;
-		}
-		
-		try {
-			newOrderSet.setNumStrings(Integer.parseInt(txtNumStrings.getText()));
-		}
-		catch(Exception ex) {
-			error = true;
-			err = new MessageBox(shlAddNewOrder);
-			err.setMessage("You must enter a numeric amount for strings.");
-			err.open();
-		}
-		
-		if(!error) {
-			if(!editMode) {
-				//Set all other order fields
-				newOrderSet.setBodyMaterial(cboVwrBodyMaterial.getCombo().getText());
-				newOrderSet.setColor(txtColor.getText());
-				newOrderSet.setFinishType(cboVwrFinishType.getCombo().getText());
-				newOrderSet.setFretboardMaterial(cboVwrFretboardMaterial.getCombo().getText());
-				newOrderSet.setNeckMaterial(cboVwrNeckMaterial.getCombo().getText());
-				newOrderSet.setNeckRadius(cboVwrNeckRadius.getCombo().getText());
-				newOrderSet.setStyle(cboVwrStyle.getCombo().getText());
-				newOrderSet.setTuningPegs(cboVwrTuningPegs.getCombo().getText());
-				newOrderSet.setType(cboVwrType.getCombo().getText());
-				newOrderSet.setSpecInstr(txtSpecInstr.getText());
-				newOrderSet.setCustName(txtCustName.getText());
-				newOrderSet.setOrderStatus("Pending");
-				newOrderSet.setOrderId(Startup.orderQueue.size() + 1);
-				newOrderSet.setLastUpdated(new Date());
-			
-				Startup.orderQueue.add(newOrderSet);	//Push the new CustOrder to the ordering queue
-			}
-			else {
-				curr.setBodyMaterial(cboVwrBodyMaterial.getCombo().getText());
-				curr.setColor(txtColor.getText());
-				curr.setFinishType(cboVwrFinishType.getCombo().getText());
-				curr.setFretboardMaterial(cboVwrFretboardMaterial.getCombo().getText());
-				curr.setNeckMaterial(cboVwrNeckMaterial.getCombo().getText());
-				curr.setNeckRadius(cboVwrNeckRadius.getCombo().getText());
-				curr.setStyle(cboVwrStyle.getCombo().getText());
-				curr.setTuningPegs(cboVwrTuningPegs.getCombo().getText());
-				curr.setType(cboVwrType.getCombo().getText());
-				curr.setSpecInstr(txtSpecInstr.getText());
-				curr.setCustName(txtCustName.getText());
-				curr.setOrderStatus("Pending");
-				curr.setOrderId(Startup.orderQueue.size() + 1);
-				curr.setLastUpdated(new Date());
-				
-				editMode = false;
-				curr = null;
-			}
-			
-			shlAddNewOrder.close();
-			Startup.window.getTblVwrOrder().refresh();
-		}	
-	}
 	
 	//GUI Methods
 	/**
@@ -296,7 +206,7 @@ public class AddOrder {
 		btnSubmit.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				AddNewOrder();
+				AddEditOrder();
 			}
 		});
 		
@@ -337,9 +247,85 @@ public class AddOrder {
 			txtNumFrets.setText(Integer.toString(curr.getNumFrets()));
 			txtNumStrings.setText(Integer.toString(curr.getNumStrings()));
 			txtSpecInstr.setText(curr.getSpecInstr());
-		}
-		
+		}	
 	}
+	
+	//Methods (Non-GUI)
+		/**
+		 * Create a new CustOrder object and store all the necessary fields (after user clicks "btnSubmit").
+		 * The CustOrder is then pushed to the ordering queue.
+		 */
+		private void AddEditOrder() {
+			CustOrder newOrderSet = new CustOrder();
+			MessageBox err;
+			boolean error = false;
+			
+			//Set user-set numerical fields first (may fail due to invalid input)
+			try {
+				newOrderSet.setNumFrets(Integer.parseInt(txtNumFrets.getText()));
+			}
+			catch(Exception ex){
+				error = true;
+				err = new MessageBox(shlAddNewOrder);
+				err.setMessage("You must enter a numeric amount for frets.");
+				err.open();
+				//return;
+			}
+			
+			try {
+				newOrderSet.setNumStrings(Integer.parseInt(txtNumStrings.getText()));
+			}
+			catch(Exception ex) {
+				error = true;
+				err = new MessageBox(shlAddNewOrder);
+				err.setMessage("You must enter a numeric amount for strings.");
+				err.open();
+			}
+			
+			if(!error) {
+				if(!editMode) {
+					//Set all other order fields
+					newOrderSet.setBodyMaterial(cboVwrBodyMaterial.getCombo().getText());
+					newOrderSet.setColor(txtColor.getText());
+					newOrderSet.setFinishType(cboVwrFinishType.getCombo().getText());
+					newOrderSet.setFretboardMaterial(cboVwrFretboardMaterial.getCombo().getText());
+					newOrderSet.setNeckMaterial(cboVwrNeckMaterial.getCombo().getText());
+					newOrderSet.setNeckRadius(cboVwrNeckRadius.getCombo().getText());
+					newOrderSet.setStyle(cboVwrStyle.getCombo().getText());
+					newOrderSet.setTuningPegs(cboVwrTuningPegs.getCombo().getText());
+					newOrderSet.setType(cboVwrType.getCombo().getText());
+					newOrderSet.setSpecInstr(txtSpecInstr.getText());
+					newOrderSet.setCustName(txtCustName.getText());
+					newOrderSet.setOrderStatus("Pending");
+					newOrderSet.setOrderId(Startup.orderQueue.size() + 1);
+					newOrderSet.setLastUpdated(new Date());
+				
+					Startup.orderQueue.add(newOrderSet);	//Push the new CustOrder to the ordering queue
+				}
+				else {
+					curr.setBodyMaterial(cboVwrBodyMaterial.getCombo().getText());
+					curr.setColor(txtColor.getText());
+					curr.setFinishType(cboVwrFinishType.getCombo().getText());
+					curr.setFretboardMaterial(cboVwrFretboardMaterial.getCombo().getText());
+					curr.setNeckMaterial(cboVwrNeckMaterial.getCombo().getText());
+					curr.setNeckRadius(cboVwrNeckRadius.getCombo().getText());
+					curr.setStyle(cboVwrStyle.getCombo().getText());
+					curr.setTuningPegs(cboVwrTuningPegs.getCombo().getText());
+					curr.setType(cboVwrType.getCombo().getText());
+					curr.setSpecInstr(txtSpecInstr.getText());
+					curr.setCustName(txtCustName.getText());
+					curr.setOrderStatus("Pending");
+					curr.setOrderId(Startup.orderQueue.size() + 1);
+					curr.setLastUpdated(new Date());
+					
+					editMode = false;
+					curr = null;
+				}
+				
+				shlAddNewOrder.close();
+				Startup.window.getTblVwrOrder().refresh();
+			}	
+		}
 		
 	//ComboViewer getters/setters
 	protected ComboViewer getCboVwrType() {

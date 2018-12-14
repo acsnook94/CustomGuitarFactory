@@ -37,9 +37,6 @@ public class MainScreen {
 	protected static int selectedOrderId; 
 	private TableViewer tblVwrOrder;
 	
-	//Non-GUI Methods
-	//TODO
-	
 	//GUI Methods
 	/**
 	 * Open the window.
@@ -158,6 +155,7 @@ public class MainScreen {
 				selectedOrderId = Integer.parseInt(selection[0].getText(0));
 			}
 		});
+		
 		tblOrder = tblVwrOrder.getTable();
 		tblOrder.setLinesVisible(true);
 		tblOrder.setHeaderVisible(true);
@@ -187,14 +185,11 @@ public class MainScreen {
 	 * @author Andrew Snook
 	 */
 	private static class CustOrderContentProvider implements IStructuredContentProvider {
-		
 		public Object[] getElements(Object inputElement) {
 			return Startup.orderQueue.toArray();
 		}
-		
 		public void dispose() {
 		}
-		
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		}
 	}
@@ -248,6 +243,7 @@ public class MainScreen {
 	protected TableViewer getTblVwrOrder() {
 		return tblVwrOrder;
 	}
+	
 }
 
 
