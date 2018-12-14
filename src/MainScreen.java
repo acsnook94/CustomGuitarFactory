@@ -7,6 +7,7 @@ import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -19,6 +20,8 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 
 /**
  * This class is used to display a window containing an order queue table, along with buttons which allow the user 
@@ -30,6 +33,7 @@ public class MainScreen {
 	//Class Fields
 	protected Shell shlCustomGuitarOrdering;
 	private Table tblOrder;
+	protected static int selectedOrderId; 
 	
 	//Non-GUI Methods
 	//TODO
@@ -85,6 +89,15 @@ public class MainScreen {
 		btnRefresh.setText("Refresh");
 		
 		Button btnEditOrder = new Button(grpButtons, SWT.NONE);
+		btnEditOrder.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				AddOrder edit = new AddOrder();
+				AddOrder.editMode = "edit";
+				edit.open();
+				
+			}
+		});
 		btnEditOrder.setLocation(10, 122);
 		btnEditOrder.setSize(97, 45);
 		btnEditOrder.setText("Edit Order");
@@ -116,6 +129,9 @@ public class MainScreen {
 		btnUpdateOrder.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				//Get order ID from the current selected order row in table
+				TableItem[] selection = tblOrder.getSelection();
+				selectedOrderId = Integer.parseInt(selection[0].getText(0));
 				UpdateOrder uOrder = new UpdateOrder(shlCustomGuitarOrdering, 0);
 				uOrder.open();
 			}

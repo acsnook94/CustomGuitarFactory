@@ -38,6 +38,8 @@ public class AddOrder {
 	private ComboViewer cboVwrNeckRadius;
 	private ComboViewer cboVwrFinishType;
 	private ComboViewer cboVwrTuningPegs;
+	protected static String editMode;
+	protected static CustOrder curr;
 
 	/**
 	 * Launch the application.
@@ -79,23 +81,43 @@ public class AddOrder {
 			err.open();
 		}
 		
-		//Set all other order fields
-		newOrderSet.setBodyMaterial(cboVwrBodyMaterial.getCombo().getText());
-		newOrderSet.setColor(txtColor.getText());
-		newOrderSet.setFinishType(cboVwrFinishType.getCombo().getText());
-		newOrderSet.setFretboardMaterial(cboVwrFretboardMaterial.getCombo().getText());
-		newOrderSet.setNeckMaterial(cboVwrNeckMaterial.getCombo().getText());
-		newOrderSet.setNeckRadius(cboVwrNeckRadius.getCombo().getText());
-		newOrderSet.setStyle(cboVwrStyle.getCombo().getText());
-		newOrderSet.setTuningPegs(cboVwrTuningPegs.getCombo().getText());
-		newOrderSet.setType(cboVwrType.getCombo().getText());
-		newOrderSet.setSpecInstr(txtSpecInstr.getText());
-		newOrderSet.setCustName(txtCustName.getText());
-		newOrderSet.setOrderStatus("Pending");
-		newOrderSet.setOrderId(Startup.orderQueue.size() + 1);
-		newOrderSet.setLastUpdated(new Date());
+		if(!editMode.equals("mode")) {
+			//Set all other order fields
+			newOrderSet.setBodyMaterial(cboVwrBodyMaterial.getCombo().getText());
+			newOrderSet.setColor(txtColor.getText());
+			newOrderSet.setFinishType(cboVwrFinishType.getCombo().getText());
+			newOrderSet.setFretboardMaterial(cboVwrFretboardMaterial.getCombo().getText());
+			newOrderSet.setNeckMaterial(cboVwrNeckMaterial.getCombo().getText());
+			newOrderSet.setNeckRadius(cboVwrNeckRadius.getCombo().getText());
+			newOrderSet.setStyle(cboVwrStyle.getCombo().getText());
+			newOrderSet.setTuningPegs(cboVwrTuningPegs.getCombo().getText());
+			newOrderSet.setType(cboVwrType.getCombo().getText());
+			newOrderSet.setSpecInstr(txtSpecInstr.getText());
+			newOrderSet.setCustName(txtCustName.getText());
+			newOrderSet.setOrderStatus("Pending");
+			newOrderSet.setOrderId(Startup.orderQueue.size() + 1);
+			newOrderSet.setLastUpdated(new Date());
 		
-		Startup.orderQueue.add(newOrderSet);	//Push the new CustOrder to the ordering queue
+			Startup.orderQueue.add(newOrderSet);	//Push the new CustOrder to the ordering queue
+		}
+		else {
+			curr.setBodyMaterial(cboVwrBodyMaterial.getCombo().getText());
+			curr.setColor(txtColor.getText());
+			curr.setFinishType(cboVwrFinishType.getCombo().getText());
+			curr.setFretboardMaterial(cboVwrFretboardMaterial.getCombo().getText());
+			curr.setNeckMaterial(cboVwrNeckMaterial.getCombo().getText());
+			curr.setNeckRadius(cboVwrNeckRadius.getCombo().getText());
+			curr.setStyle(cboVwrStyle.getCombo().getText());
+			curr.setTuningPegs(cboVwrTuningPegs.getCombo().getText());
+			curr.setType(cboVwrType.getCombo().getText());
+			curr.setSpecInstr(txtSpecInstr.getText());
+			curr.setCustName(txtCustName.getText());
+			curr.setOrderStatus("Pending");
+			curr.setOrderId(Startup.orderQueue.size() + 1);
+			curr.setLastUpdated(new Date());
+		}
+		
+		shlAddNewOrder.close();
 	}
 	
 	//GUI Methods
@@ -278,6 +300,32 @@ public class AddOrder {
 		});
 		btnCancel.setBounds(206, 73, 120, 42);
 		btnCancel.setText("Cancel");
+		
+		if(editMode.equals("edit")) {
+			java.util.Iterator<CustOrder> iterator = Startup.orderQueue.iterator();
+			while(iterator.hasNext()) {
+				curr = iterator.next();
+				
+				if(curr.getOrderId() == MainScreen.selectedOrderId) {
+					break;
+				}
+			}
+			
+			getCboVwrBodyMaterial().getCombo().setText(curr.getBodyMaterial());
+			getCboVwrFinishType().getCombo().setText(curr.getFinishType());
+			getCboVwrFretboardMaterial().getCombo().setText(curr.getFretboardMaterial());
+			getCboVwrNeckMaterial().getCombo().setText(curr.getNeckMaterial());
+			getCboVwrNeckRadius().getCombo().setText(curr.getNeckRadius());
+			getCboVwrStyle().getCombo().setText(curr.getStyle());
+			getCboVwrTuningPegs().getCombo().setText(curr.getTuningPegs());
+			getCboVwrType().getCombo().setText(curr.getType());
+			txtColor.setText(curr.getColor());
+			txtCustName.setText(curr.getCustName());
+			txtNumFrets.setText(Integer.toString(curr.getNumFrets()));
+			txtNumStrings.setText(Integer.toString(curr.getNumStrings()));
+			txtSpecInstr.setText(curr.getSpecInstr());
+			
+		}
 	}
 		
 	//ComboViewer getters/setters

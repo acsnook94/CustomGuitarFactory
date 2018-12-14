@@ -1,6 +1,10 @@
 import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+
+import com.ibm.icu.util.BytesTrie.Iterator;
+import com.sun.org.apache.xml.internal.security.transforms.TransformParam;
+
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
@@ -8,6 +12,9 @@ import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.widgets.Combo;
+
+import java.util.LinkedList;
+
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.layout.GridData;
@@ -86,6 +93,19 @@ public class UpdateOrder extends Dialog {
 		btnSaveStatus.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				String newSelection = cboNewStatus.getText();
+				System.out.println(newSelection);
+				CustOrder temp;
+				java.util.Iterator<CustOrder> iterator = Startup.orderQueue.iterator();
+				while(iterator.hasNext()) {
+					temp = iterator.next();
+					
+					if(temp.getOrderId() == MainScreen.selectedOrderId) {
+						temp.setOrderStatus(newSelection);
+					}
+				}
+				shlUpdateOrderStatus.close();
+								
 			}
 		});
 		GridData gd_btnSaveStatus = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
