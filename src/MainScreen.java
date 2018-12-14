@@ -107,9 +107,11 @@ public class MainScreen {
 		
 		Button btnAddOrder = new Button(grpButtons, SWT.NONE);
 		btnAddOrder.addSelectionListener(new SelectionAdapter() {
+			//Opens the Add/Edit Order screen when "AddOrder" btn is clicked
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				AddOrder addOrder = new AddOrder();
+				AddOrder.editMode = false;
 				addOrder.open();
 			}
 		});
@@ -121,6 +123,7 @@ public class MainScreen {
 		btnExit.setLocation(10, 389);
 		btnExit.setSize(97, 30);
 		btnExit.addSelectionListener(new SelectionAdapter() {
+			//Program will exit here when the "Exit" btn is clicked
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				System.exit(0);
@@ -132,11 +135,13 @@ public class MainScreen {
 		btnUpdateOrder.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				//Opens the "UpdateOrder" dialog box
 				if(selectedOrderId != -1) {
 					UpdateOrder uOrder = new UpdateOrder(shlCustomGuitarOrdering, 0);
 					uOrder.open();
 				}
 				else {
+					//User failed to select a row before clicking "Update Order" btn
 					MessageBox err = new MessageBox(shlCustomGuitarOrdering);
 					err.setMessage("You must select an order from the table first.");
 					err.open();
@@ -152,7 +157,8 @@ public class MainScreen {
 		composite_1.setLayoutData(fd_composite_1);
 		
 		tblVwrOrder = new TableViewer(composite_1, SWT.BORDER | SWT.FULL_SELECTION);
-		tblVwrOrder.addSelectionChangedListener(new ISelectionChangedListener() {
+		tblVwrOrder.addSelectionChangedListener(new ISelectionChangedListener() {	
+			//Updates class variable "selectedOrderId" whenever user clicks on a new table row
 			public void selectionChanged(SelectionChangedEvent arg0) {
 				TableItem[] selection = tblVwrOrder.getTable().getSelection();
 				selectedOrderId = Integer.parseInt(selection[0].getText(0));
@@ -179,7 +185,7 @@ public class MainScreen {
 		tblclmnOrderStatus.setText("Order Status");
 		
 		TableColumn tblclmnLastUpdated = new TableColumn(tblOrder, SWT.LEFT);
-		tcl_composite_1.setColumnData(tblclmnLastUpdated, new ColumnPixelData(130, true, true));
+		tcl_composite_1.setColumnData(tblclmnLastUpdated, new ColumnPixelData(200, true, true));
 		tblclmnLastUpdated.setText("Last Updated");
 	}
 	
@@ -205,25 +211,20 @@ public class MainScreen {
 		@Override
 		public void addListener(ILabelProviderListener listener) {
 		}
-		
 		@Override
 		public void dispose() {
 		}
-		
 		@Override
 		public boolean isLabelProperty(Object element, String property) {
 			return false;
 		}
-		
 		@Override
 		public void removeListener(ILabelProviderListener listener) {
 		}
-		
 		@Override
 		public Image getColumnImage(Object element, int columnIndex) {
 			return null;
 		}
-		
 		@Override
 		public String getColumnText(Object element, int columnIndex) {
 			CustOrder co = (CustOrder) element;

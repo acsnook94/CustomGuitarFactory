@@ -35,6 +35,7 @@ public class UpdateOrder extends Dialog {
 		setText("SWT Dialog");
 	}
 
+	//GUI Methods
 	/**
 	 * Open the dialog.
 	 * @return the result
@@ -49,6 +50,7 @@ public class UpdateOrder extends Dialog {
 				display.sleep();
 			}
 		}
+		
 		return result;
 	}
 
@@ -85,25 +87,19 @@ public class UpdateOrder extends Dialog {
 		
 		Button btnSaveStatus = new Button(composite_0, SWT.NONE);
 		btnSaveStatus.addSelectionListener(new SelectionAdapter() {
+			//When the "Save" btn is clicked, an iterator will be used to find the correct CustOrder to save new status to
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				String newSelection = cboNewStatus.getText();
 				//System.out.println(newSelection);
-				CustOrder temp;
-				java.util.Iterator<CustOrder> iterator = Startup.orderQueue.iterator();
-			
-				while(iterator.hasNext()) {
-					temp = iterator.next();
-					
-					if(temp.getOrderId() == MainScreen.selectedOrderId) {
-						temp.setOrderStatus(newSelection);
-						Date newDate = new Date();
-						temp.setLastUpdated(newDate);
-					}
-				}
+				
+				CustOrder curr = findCustOrder();
+				curr.setOrderStatus(newSelection);
+				Date update = new Date();
+				curr.setLastUpdated(update);
 				
 				shlUpdateOrderStatus.close();
-				Startup.window.getTblVwrOrder().refresh();			
+				Startup.window.getTblVwrOrder().refresh();	//Updates order queue table on MainWindow			
 			}
 		});
 		
@@ -111,6 +107,24 @@ public class UpdateOrder extends Dialog {
 		gd_btnSaveStatus.widthHint = 98;
 		btnSaveStatus.setLayoutData(gd_btnSaveStatus);
 		btnSaveStatus.setText("Save");
+	}
+	
+	/**
+	 * This method will get a reference to the currently selected order table row in "MainWindow"
+	 */
+	private CustOrder findCustOrder() {
+		CustOrder temp = null;
+		java.util.Iterator<CustOrder> iterator = Startup.orderQueue.iterator();
+		
+		while(iterator.hasNext()) {
+			temp = iterator.next();
+			
+			if(temp.getOrderId() == MainScreen.selectedOrderId) {
+				break;
+			}
+		}
+		
+		return temp;
 	}
 	
 }

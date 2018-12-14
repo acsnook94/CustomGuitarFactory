@@ -59,11 +59,12 @@ public class AddOrder {
 
 	/**
 	 * Create contents of the window.
+	 * @wbp.parser.entryPoint
 	 */
 	protected void createContents() {
 		shlAddNewOrder = new Shell();
 		shlAddNewOrder.setSize(721, 494);
-		shlAddNewOrder.setText("Add New Order");
+		shlAddNewOrder.setText("Add/Edit Order");
 		shlAddNewOrder.setLayout(new FormLayout());
 		
 		Composite composite_0 = new Composite(shlAddNewOrder, SWT.NONE);
@@ -204,9 +205,9 @@ public class AddOrder {
 		
 		Button btnSubmit = new Button(composite_2, SWT.NONE);
 		btnSubmit.addSelectionListener(new SelectionAdapter() {
+			//Calls a method to save new/changed order data after user clicks "Submit" btn
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-
 				AddEditOrder();
 			}
 		});
@@ -216,6 +217,7 @@ public class AddOrder {
 		
 		Button btnCancel = new Button(composite_2, SWT.NONE);
 		btnCancel.addSelectionListener(new SelectionAdapter() {
+			//Exits the Add/Edit Items screen w/o saving data when "Cancel" btn is clicked
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				shlAddNewOrder.close();
@@ -225,6 +227,8 @@ public class AddOrder {
 		btnCancel.setBounds(206, 73, 120, 42);
 		btnCancel.setText("Cancel");
 		
+		/* If "editMode" is true, then an iterator will be used to retrieve all current data for the selected order table row
+			(from MainWindow) and use it to pre-populate the text/combo boxes on Add/Edit Order window */
 		if(editMode) {
 			java.util.Iterator<CustOrder> iterator = Startup.orderQueue.iterator();
 			while(iterator.hasNext()) {
@@ -263,7 +267,12 @@ public class AddOrder {
 			
 			//Set user-set numerical fields first (may fail due to invalid input)
 			try {
-				newOrderSet.setNumFrets(Integer.parseInt(txtNumFrets.getText()));
+				if(!editMode) {
+					newOrderSet.setNumFrets(Integer.parseInt(txtNumFrets.getText()));
+				}
+				else {
+					curr.setNumFrets(Integer.parseInt(txtNumFrets.getText()));
+				}
 			}
 			catch(Exception ex){
 				error = true;
@@ -274,7 +283,12 @@ public class AddOrder {
 			}
 			
 			try {
-				newOrderSet.setNumStrings(Integer.parseInt(txtNumStrings.getText()));
+				if(!editMode) {
+					newOrderSet.setNumStrings(Integer.parseInt(txtNumStrings.getText()));
+				}
+				else {
+					curr.setNumStrings(Integer.parseInt(txtNumStrings.getText()));
+				}
 			}
 			catch(Exception ex) {
 				error = true;
@@ -283,9 +297,10 @@ public class AddOrder {
 				err.open();
 			}
 			
+			//If no error occurred above this
 			if(!error) {
+				//Set all other order fields
 				if(!editMode) {
-					//Set all other order fields
 					newOrderSet.setBodyMaterial(cboVwrBodyMaterial.getCombo().getText());
 					newOrderSet.setColor(txtColor.getText());
 					newOrderSet.setFinishType(cboVwrFinishType.getCombo().getText());
