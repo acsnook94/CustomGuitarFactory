@@ -61,7 +61,7 @@ public class AddOrder {
 	 */
 	private void AddNewOrder() {
 		CustOrder newOrderSet = new CustOrder();
-		MessageBox err = new MessageBox(shlAddNewOrder);
+		MessageBox err;
 		boolean error = false;
 		
 		//Set user-set numerical fields first (may fail due to invalid input)
@@ -70,6 +70,7 @@ public class AddOrder {
 		}
 		catch(Exception ex){
 			error = true;
+			err = new MessageBox(shlAddNewOrder);
 			err.setMessage("You must enter a numeric amount for frets.");
 			err.open();
 			//return;
@@ -80,6 +81,7 @@ public class AddOrder {
 		}
 		catch(Exception ex) {
 			error = true;
+			err = new MessageBox(shlAddNewOrder);
 			err.setMessage("You must enter a numeric amount for strings.");
 			err.open();
 		}
@@ -333,8 +335,8 @@ public class AddOrder {
 			txtNumFrets.setText(Integer.toString(curr.getNumFrets()));
 			txtNumStrings.setText(Integer.toString(curr.getNumStrings()));
 			txtSpecInstr.setText(curr.getSpecInstr());
-			
 		}
+		
 	}
 		
 	//ComboViewer getters/setters

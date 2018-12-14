@@ -88,7 +88,7 @@ public class UpdateOrder extends Dialog {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				String newSelection = cboNewStatus.getText();
-				System.out.println(newSelection);
+				//System.out.println(newSelection);
 				CustOrder temp;
 				java.util.Iterator<CustOrder> iterator = Startup.orderQueue.iterator();
 			

@@ -17,6 +17,7 @@ import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ColumnPixelData;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.Viewer;
@@ -124,12 +125,21 @@ public class MainScreen {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				//Get order ID from the current selected order row in table
-				TableItem[] selection = tblOrder.getSelection();
-				selectedOrderId = Integer.parseInt(selection[0].getText(0));
-				UpdateOrder uOrder = new UpdateOrder(shlCustomGuitarOrdering, 0);
-				uOrder.open();
+				try {
+					TableItem[] selection = tblOrder.getSelection();
+					selectedOrderId = Integer.parseInt(selection[0].getText(0));
+					UpdateOrder uOrder = new UpdateOrder(shlCustomGuitarOrdering, 0);
+					uOrder.open();
+				}
+				catch(Exception ex) {
+					MessageBox err = new MessageBox(shlCustomGuitarOrdering);
+					err.setMessage("You must select an order first.");
+					err.open();
+				}
+					
 			}
 		});
+		
 		btnUpdateOrder.setText("Update Status");
 		btnUpdateOrder.setBounds(10, 21, 97, 45);
 		fd_composite_1.top = new FormAttachment(0, 10);
