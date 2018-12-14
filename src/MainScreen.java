@@ -21,6 +21,8 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 
 /**
  * This class is used to display a window containing an order queue table, along with buttons which allow the user 
@@ -87,9 +89,16 @@ public class MainScreen {
 		btnEditOrder.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				AddOrder edit = new AddOrder();
-				AddOrder.editMode = true;
-				edit.open();
+				if(selectedOrderId != -1) {
+					AddOrder edit = new AddOrder();
+					AddOrder.editMode = true;
+					edit.open();
+				}
+				else {
+					MessageBox err = new MessageBox(shlCustomGuitarOrdering);
+					err.setMessage("You must select an order from the table first.");
+				}
+				
 			}
 		});
 		
@@ -124,17 +133,13 @@ public class MainScreen {
 		btnUpdateOrder.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				//Get order ID from the current selected order row in table
-				try {
-					TableItem[] selection = tblOrder.getSelection();
-					selectedOrderId = Integer.parseInt(selection[0].getText(0));
+				if(selectedOrderId != -1) {
 					UpdateOrder uOrder = new UpdateOrder(shlCustomGuitarOrdering, 0);
 					uOrder.open();
 				}
-				catch(Exception ex) {
+				else {
 					MessageBox err = new MessageBox(shlCustomGuitarOrdering);
-					err.setMessage("You must select an order first.");
-					err.open();
+					err.setMessage("You must select an order from the table first.");
 				}
 					
 			}
@@ -147,6 +152,12 @@ public class MainScreen {
 		composite_1.setLayoutData(fd_composite_1);
 		
 		tblVwrOrder = new TableViewer(composite_1, SWT.BORDER | SWT.FULL_SELECTION);
+		tblVwrOrder.addSelectionChangedListener(new ISelectionChangedListener() {
+			public void selectionChanged(SelectionChangedEvent arg0) {
+				TableItem[] selection = tblVwrOrder.getTable().getSelection();
+				selectedOrderId = Integer.parseInt(selection[0].getText(0));
+			}
+		});
 		tblOrder = tblVwrOrder.getTable();
 		tblOrder.setLinesVisible(true);
 		tblOrder.setHeaderVisible(true);

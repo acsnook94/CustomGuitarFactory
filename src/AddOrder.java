@@ -87,7 +87,7 @@ public class AddOrder {
 		}
 		
 		if(!error) {
-			if(editMode) {
+			if(!editMode) {
 				//Set all other order fields
 				newOrderSet.setBodyMaterial(cboVwrBodyMaterial.getCombo().getText());
 				newOrderSet.setColor(txtColor.getText());
@@ -299,6 +299,7 @@ public class AddOrder {
 				AddNewOrder();
 			}
 		});
+		
 		btnSubmit.setBounds(70, 73, 120, 42);
 		btnSubmit.setText("Submit");
 		
@@ -309,6 +310,7 @@ public class AddOrder {
 				shlAddNewOrder.close();
 			}
 		});
+		
 		btnCancel.setBounds(206, 73, 120, 42);
 		btnCancel.setText("Cancel");
 		
