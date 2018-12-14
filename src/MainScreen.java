@@ -115,7 +115,7 @@ public class MainScreen {
 				addOrder.open();
 			}
 		});
-		btnAddOrder.setLocation(10, 231);
+		btnAddOrder.setLocation(10, 123);
 		btnAddOrder.setSize(97, 45);
 		btnAddOrder.setText("Add Order");
 		

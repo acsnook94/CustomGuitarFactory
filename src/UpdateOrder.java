@@ -84,6 +84,7 @@ public class UpdateOrder extends Dialog {
 		gd_cboNewStatus.widthHint = 305;
 		cboNewStatus.setLayoutData(gd_cboNewStatus);
 		new Label(composite_0, SWT.NONE);
+		cboVwrNewStatus.getCombo().setText(findCustOrder().getOrderStatus());
 		
 		Button btnSaveStatus = new Button(composite_0, SWT.NONE);
 		btnSaveStatus.addSelectionListener(new SelectionAdapter() {
