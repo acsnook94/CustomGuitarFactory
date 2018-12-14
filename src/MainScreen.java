@@ -34,7 +34,7 @@ public class MainScreen {
 	//Class Fields
 	protected Shell shlCustomGuitarOrdering;
 	private Table tblOrder;
-	protected static int selectedOrderId; 
+	protected static int selectedOrderId = -1; 
 	private TableViewer tblVwrOrder;
 	
 	//GUI Methods
@@ -86,17 +86,19 @@ public class MainScreen {
 		btnEditOrder.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				MessageBox err;
 				if(selectedOrderId != -1) {
 					AddOrder edit = new AddOrder();
 					AddOrder.editMode = true;
 					edit.open();
 				}
-				else {
-					MessageBox err = new MessageBox(shlCustomGuitarOrdering);
+				else{
+					err = new MessageBox(shlCustomGuitarOrdering);
 					err.setMessage("You must select an order from the table first.");
+					err.open();
 				}
-				
 			}
+				
 		});
 		
 		btnEditOrder.setLocation(10, 72);
@@ -137,6 +139,7 @@ public class MainScreen {
 				else {
 					MessageBox err = new MessageBox(shlCustomGuitarOrdering);
 					err.setMessage("You must select an order from the table first.");
+					err.open();
 				}
 					
 			}
