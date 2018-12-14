@@ -88,11 +88,11 @@ public class MainScreen {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				AddOrder edit = new AddOrder();
-				AddOrder.editMode = "edit";
+				AddOrder.editMode = true;
 				edit.open();
-				
 			}
 		});
+		
 		btnEditOrder.setLocation(10, 72);
 		btnEditOrder.setSize(97, 45);
 		btnEditOrder.setText("Edit Order");

@@ -38,7 +38,7 @@ public class AddOrder {
 	private ComboViewer cboVwrNeckRadius;
 	private ComboViewer cboVwrFinishType;
 	private ComboViewer cboVwrTuningPegs;
-	protected static String editMode = "";
+	protected static boolean editMode;
 	protected static CustOrder curr;
 
 	/**
@@ -87,7 +87,7 @@ public class AddOrder {
 		}
 		
 		if(!error) {
-			if(editMode.equals("")) {
+			if(editMode) {
 				//Set all other order fields
 				newOrderSet.setBodyMaterial(cboVwrBodyMaterial.getCombo().getText());
 				newOrderSet.setColor(txtColor.getText());
@@ -106,7 +106,7 @@ public class AddOrder {
 			
 				Startup.orderQueue.add(newOrderSet);	//Push the new CustOrder to the ordering queue
 			}
-			else if(editMode.equals("edit")) {
+			else {
 				curr.setBodyMaterial(cboVwrBodyMaterial.getCombo().getText());
 				curr.setColor(txtColor.getText());
 				curr.setFinishType(cboVwrFinishType.getCombo().getText());
@@ -122,7 +122,7 @@ public class AddOrder {
 				curr.setOrderId(Startup.orderQueue.size() + 1);
 				curr.setLastUpdated(new Date());
 				
-				editMode = "";
+				editMode = false;
 				curr = null;
 			}
 			
@@ -312,7 +312,7 @@ public class AddOrder {
 		btnCancel.setBounds(206, 73, 120, 42);
 		btnCancel.setText("Cancel");
 		
-		if(editMode.equals("edit")) {
+		if(editMode) {
 			java.util.Iterator<CustOrder> iterator = Startup.orderQueue.iterator();
 			while(iterator.hasNext()) {
 				curr = iterator.next();
