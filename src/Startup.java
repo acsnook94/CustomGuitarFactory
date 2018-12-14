@@ -9,6 +9,7 @@ import java.util.Queue;
 public class Startup {
 	//Will hold all orders (instances of CustOrder)
 	protected static Queue<CustOrder> orderQueue;
+	protected static MainScreen window;
 	
 	/**
 	 * Launch the application.
@@ -18,7 +19,7 @@ public class Startup {
 		orderQueue = new LinkedList<>();
 		
 		try {
-			MainScreen window = new MainScreen();
+			window = new MainScreen();
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -125,6 +125,7 @@ public class AddOrder {
 			}
 			
 			shlAddNewOrder.close();
+			Startup.window.getTblVwrOrder().refresh();
 		}	
 	}
 	

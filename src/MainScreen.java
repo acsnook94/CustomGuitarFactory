@@ -20,8 +20,6 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
 
 /**
  * This class is used to display a window containing an order queue table, along with buttons which allow the user 
@@ -34,6 +32,7 @@ public class MainScreen {
 	protected Shell shlCustomGuitarOrdering;
 	private Table tblOrder;
 	protected static int selectedOrderId; 
+	private TableViewer tblVwrOrder;
 	
 	//Non-GUI Methods
 	//TODO
@@ -41,6 +40,8 @@ public class MainScreen {
 	//GUI Methods
 	/**
 	 * Open the window.
+	 * 
+	 * @wbp.parser.entryPoint
 	 */
 	public void open() {
 		Display display = Display.getDefault();
@@ -56,7 +57,6 @@ public class MainScreen {
 
 	/**
 	 * Create contents of the window.
-	 * @wbp.parser.entryPoint
 	 */
 	protected void createContents() {
 		shlCustomGuitarOrdering = new Shell();
@@ -82,12 +82,6 @@ public class MainScreen {
 		Group grpButtons = new Group(composite_0, SWT.NONE);
 		grpButtons.setBounds(10, -10, 117, 426);
 		
-		Button btnRefresh = new Button(grpButtons, SWT.NONE);
-		
-		btnRefresh.setLocation(10, 20);
-		btnRefresh.setSize(97, 45);
-		btnRefresh.setText("Refresh");
-		
 		Button btnEditOrder = new Button(grpButtons, SWT.NONE);
 		btnEditOrder.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -98,7 +92,7 @@ public class MainScreen {
 				
 			}
 		});
-		btnEditOrder.setLocation(10, 122);
+		btnEditOrder.setLocation(10, 72);
 		btnEditOrder.setSize(97, 45);
 		btnEditOrder.setText("Edit Order");
 		
@@ -137,12 +131,12 @@ public class MainScreen {
 			}
 		});
 		btnUpdateOrder.setText("Update Status");
-		btnUpdateOrder.setBounds(10, 71, 97, 45);
+		btnUpdateOrder.setBounds(10, 21, 97, 45);
 		fd_composite_1.top = new FormAttachment(0, 10);
 		fd_composite_1.bottom = new FormAttachment(100, -10);
 		composite_1.setLayoutData(fd_composite_1);
 		
-		TableViewer tblVwrOrder = new TableViewer(composite_1, SWT.BORDER | SWT.FULL_SELECTION);
+		tblVwrOrder = new TableViewer(composite_1, SWT.BORDER | SWT.FULL_SELECTION);
 		tblOrder = tblVwrOrder.getTable();
 		tblOrder.setLinesVisible(true);
 		tblOrder.setHeaderVisible(true);
@@ -165,13 +159,6 @@ public class MainScreen {
 		TableColumn tblclmnLastUpdated = new TableColumn(tblOrder, SWT.LEFT);
 		tcl_composite_1.setColumnData(tblclmnLastUpdated, new ColumnPixelData(130, true, true));
 		tblclmnLastUpdated.setText("Last Updated");
-		
-		btnRefresh.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				tblVwrOrder.refresh();
-			}
-		});
 	}
 	
 	/**
@@ -236,6 +223,10 @@ public class MainScreen {
 		}
 	}
 	
+	//Getters
+	protected TableViewer getTblVwrOrder() {
+		return tblVwrOrder;
+	}
 }
 
 
