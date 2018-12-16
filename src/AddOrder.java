@@ -330,7 +330,6 @@ public class AddOrder {
 					curr.setType(cboVwrType.getCombo().getText());
 					curr.setSpecInstr(txtSpecInstr.getText());
 					curr.setCustName(txtCustName.getText());
-					curr.setOrderStatus("Pending");
 					curr.setOrderId(Startup.orderQueue.size() + 1);
 					curr.setLastUpdated(new Date());
 					
