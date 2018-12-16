@@ -301,7 +301,7 @@ public class AddOrder {
 			
 			//If no error occurred above this
 			if(!error) {
-				//Set all other order fields
+				//Set all other order form fields
 				if(!editMode) {
 					newOrderSet.setBodyMaterial(cboVwrBodyMaterial.getCombo().getText());
 					newOrderSet.setColor(txtColor.getText());
@@ -319,6 +319,14 @@ public class AddOrder {
 					newOrderSet.setLastUpdated(new Date());
 				
 					Startup.orderQueue.add(newOrderSet);	//Push the new CustOrder to the ordering queue
+					Startup.window.getTblVwrOrder().refresh();
+					
+					//If currently selected filter for order table is "All" or "Pending", update order count label
+					if(Startup.window.getCboStatusFilters().getText().equals("All") 
+							|| Startup.window.getCboStatusFilters().getText().equals("Pending")){
+						Startup.window.getLblNumOrdersVal().setText(Integer.toString(Startup.orderQueue.size()));
+					}
+					
 				}
 				else {
 					curr.setBodyMaterial(cboVwrBodyMaterial.getCombo().getText());

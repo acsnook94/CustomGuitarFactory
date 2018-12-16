@@ -42,8 +42,10 @@ public class MainScreen {
 	protected static int selectedOrderId = -1; 
 	private TableViewer tblVwrOrder;
 	private static OrderStatusFilter filtCurr = null;
+	private Label lblNumOrdersVal;
+	private Combo cboStatusFilters;
+	private static boolean isLoading = true;
 	
-	//GUI Methods
 	/**
 	 * Open the window.
 	 * 
@@ -194,17 +196,26 @@ public class MainScreen {
 		tcl_composite_1.setColumnData(tblclmnLastUpdated, new ColumnPixelData(200, true, true));
 		tblclmnLastUpdated.setText("Last Updated");	
 		
-		Combo cboStatusFilters = new Combo(shlCustomGuitarOrdering, SWT.NONE);
+		cboStatusFilters = new Combo(shlCustomGuitarOrdering, SWT.NONE);
 		cboStatusFilters.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
+				//If there is already an existing filter in use, remove it
 				if(tblVwrOrder.getFilters().length > 0) {
 					tblVwrOrder.removeFilter(filtCurr); 
 				}
 				
+				//If filter is not set to "All", then add new filter based on combo choice
 				if(!cboStatusFilters.getText().equals("All")) {
 					filtCurr = new OrderStatusFilter(cboStatusFilters.getText()); 
 					tblVwrOrder.addFilter(filtCurr);
 				}
+				tblVwrOrder.refresh();
+				
+				//Update order num label
+				if(!isLoading) {
+					lblNumOrdersVal.setText(Integer.toString(tblVwrOrder.getTable().getItemCount()));
+				}
+					
 			}
 		});
 		
@@ -222,8 +233,26 @@ public class MainScreen {
 		cboStatusFilters.select(0);
 		lblStatusFilters.setLayoutData(fd_lblStatusFilters);
 		lblStatusFilters.setText("Filter by:");
+		
+		Label lblNumOrders = new Label(shlCustomGuitarOrdering, SWT.NONE);
+		FormData fd_lblNumOrders = new FormData();
+		fd_lblNumOrders.bottom = new FormAttachment(lblStatusFilters, 0, SWT.BOTTOM);
+		fd_lblNumOrders.left = new FormAttachment(composite_1, 0, SWT.LEFT);
+		lblNumOrders.setLayoutData(fd_lblNumOrders);
+		lblNumOrders.setText("# of Orders:");
+		
+		lblNumOrdersVal = new Label(shlCustomGuitarOrdering, SWT.NONE);
+		lblNumOrdersVal.setText(Integer.toString(tblVwrOrder.getTable().getItemCount()));
+		FormData fd_lblNumOrdersVal = new FormData();
+		fd_lblNumOrdersVal.top = new FormAttachment(cboStatusFilters, 3, SWT.TOP);
+		fd_lblNumOrdersVal.left = new FormAttachment(lblNumOrders, 6);
+		lblNumOrdersVal.setLayoutData(fd_lblNumOrdersVal);
+		lblNumOrdersVal.setText("0");
+		
+		isLoading = false;
 	}
 	
+	//TABLEVIEWER METHODS AND PROVIDERS
 	/**
 	 * This class is used to filter the ordering queue table on MainScreen, depending on which filter item is selected.
 	 * 
@@ -261,7 +290,6 @@ public class MainScreen {
 		}
 	}
 	
-	//TABLEVIEWER PROVIDERS
 	/**
 	 * Used to determine the fields displayed by each table column
 	 * @author Andrew Snook
@@ -301,11 +329,17 @@ public class MainScreen {
 			return "";
 		}
 	}
-	//END TABLEVIEWER PROVIDERS
+	//END TABLEVIEWER METHODS
 	
 	//Getters
 	protected TableViewer getTblVwrOrder() {
 		return tblVwrOrder;
+	}
+	protected Label getLblNumOrdersVal() {
+		return lblNumOrdersVal;
+	}
+	protected Combo getCboStatusFilters() {
+		return cboStatusFilters;
 	}
 }
 
