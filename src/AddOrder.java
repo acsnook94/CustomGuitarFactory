@@ -95,6 +95,7 @@ public class AddOrder {
 		cboType.setItems(new String[] {"Electric", "Acoustic", "Bass"});
 		
 		txtNumStrings = new Text(composite_0, SWT.BORDER);
+		txtNumStrings.setText("0");
 		txtNumStrings.setBounds(160, 106, 134, 28);
 		
 		cboVwrStyle = new ComboViewer(composite_0, SWT.NONE);
@@ -124,6 +125,7 @@ public class AddOrder {
 		lblNeckRadius.setText("Neck Radius:");
 		
 		txtNumFrets = new Text(composite_0, SWT.BORDER);
+		txtNumFrets.setText("0");
 		txtNumFrets.setBounds(10, 175, 106, 28);
 		
 		cboVwrNeckMaterial = new ComboViewer(composite_0, SWT.NONE);

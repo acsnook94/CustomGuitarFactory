@@ -21,8 +21,11 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Label;
 
 /**
  * This class is used to display a window containing an order queue table, along with buttons which allow the user 
@@ -36,6 +39,7 @@ public class MainScreen {
 	private Table tblOrder;
 	protected static int selectedOrderId = -1; 
 	private TableViewer tblVwrOrder;
+	private static OrderStatusFilter filtCurr = null;
 	
 	//GUI Methods
 	/**
@@ -59,16 +63,22 @@ public class MainScreen {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
+		OrderStatusFilter filtPending = new OrderStatusFilter("Pending");
+		OrderStatusFilter filtProd = new OrderStatusFilter("In Production");
+		OrderStatusFilter filtShipped = new OrderStatusFilter("Shipped");
+		OrderStatusFilter filtCompleted = new OrderStatusFilter("Completed");
+		OrderStatusFilter filtCancelled = new OrderStatusFilter("Cancelled");
+		
 		shlCustomGuitarOrdering = new Shell();
-		shlCustomGuitarOrdering.setSize(780, 477);
+		shlCustomGuitarOrdering.setSize(780, 533);
 		shlCustomGuitarOrdering.setText("Custom Guitar Ordering System");
 		shlCustomGuitarOrdering.setLayout(new FormLayout());
 		
 		Composite composite_0 = new Composite(shlCustomGuitarOrdering, SWT.NONE);
 		FormData fd_composite_0 = new FormData();
-		fd_composite_0.top = new FormAttachment(0, 10);
 		fd_composite_0.bottom = new FormAttachment(100, -10);
 		fd_composite_0.right = new FormAttachment(100, -8);
+		fd_composite_0.top = new FormAttachment(0, 47);
 		composite_0.setLayoutData(fd_composite_0);
 		
 		Composite composite_1 = new Composite(shlCustomGuitarOrdering, SWT.NONE);
@@ -76,7 +86,9 @@ public class MainScreen {
 		TableColumnLayout tcl_composite_1 = new TableColumnLayout();
 		composite_1.setLayout(tcl_composite_1);
 		FormData fd_composite_1 = new FormData();
+		fd_composite_1.bottom = new FormAttachment(100, -10);
 		fd_composite_1.right = new FormAttachment(100, -138);
+		fd_composite_1.top = new FormAttachment(0, 47);
 		fd_composite_1.left = new FormAttachment(0, 10);
 		
 		Group grpButtons = new Group(composite_0, SWT.NONE);
@@ -152,8 +164,28 @@ public class MainScreen {
 		
 		btnUpdateOrder.setText("Update Status");
 		btnUpdateOrder.setBounds(10, 21, 97, 45);
-		fd_composite_1.top = new FormAttachment(0, 10);
-		fd_composite_1.bottom = new FormAttachment(100, -10);
+		
+		Button btnNewButton = new Button(grpButtons, SWT.WRAP);
+		btnNewButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				tblVwrOrder.addFilter(filtPending);
+				filtCurr = filtPending;
+			}
+		});
+		btnNewButton.setBounds(10, 210, 90, 62);
+		btnNewButton.setText("Test Pending Filter");
+		
+		Button btnTestCancelFilter = new Button(grpButtons, SWT.WRAP);
+		btnTestCancelFilter.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				tblVwrOrder.removeFilter(filtCurr);
+				filtCurr = null;
+			}
+		});
+		btnTestCancelFilter.setText("Test Cancel Filter");
+		btnTestCancelFilter.setBounds(17, 296, 90, 62);
 		composite_1.setLayoutData(fd_composite_1);
 		
 		tblVwrOrder = new TableViewer(composite_1, SWT.BORDER | SWT.FULL_SELECTION);
@@ -186,7 +218,45 @@ public class MainScreen {
 		
 		TableColumn tblclmnLastUpdated = new TableColumn(tblOrder, SWT.LEFT);
 		tcl_composite_1.setColumnData(tblclmnLastUpdated, new ColumnPixelData(200, true, true));
-		tblclmnLastUpdated.setText("Last Updated");
+		tblclmnLastUpdated.setText("Last Updated");	
+		
+		Combo cboStatusFilters = new Combo(shlCustomGuitarOrdering, SWT.NONE);
+		FormData fd_cboStatusFilters = new FormData();
+		fd_cboStatusFilters.bottom = new FormAttachment(composite_1, -9);
+		fd_cboStatusFilters.right = new FormAttachment(100, -138);
+		fd_cboStatusFilters.left = new FormAttachment(100, -346);
+		cboStatusFilters.setLayoutData(fd_cboStatusFilters);
+		cboStatusFilters.setItems(new String[] {"Pending", "In Production", "Shipped", "Complete", "Cancelled"});
+		
+		Label lblStatusFilters = new Label(shlCustomGuitarOrdering, SWT.NONE);
+		FormData fd_lblStatusFilters = new FormData();
+		fd_lblStatusFilters.top = new FormAttachment(cboStatusFilters, 3, SWT.TOP);
+		fd_lblStatusFilters.right = new FormAttachment(cboStatusFilters, -13);
+		lblStatusFilters.setLayoutData(fd_lblStatusFilters);
+		lblStatusFilters.setText("Filter by:");
+	}
+	
+	/**
+	 * This class is used to filter the ordering queue table on MainScreen, depending on which filter item is selected.
+	 * 
+	 * @author Andrew Snook
+	 */
+	private static class OrderStatusFilter extends ViewerFilter{
+		private String word;
+		
+		public OrderStatusFilter(String word) {
+			this.word = word;
+		}
+		
+		@Override
+		public boolean select(Viewer vwr, Object elemParent, Object elem) {
+			CustOrder order = (CustOrder)elem;
+			if(order.getOrderStatus().equals(this.word)) {
+				return true;
+			}
+			
+			return false;
+		}
 	}
 	
 	/**
@@ -203,6 +273,7 @@ public class MainScreen {
 		}
 	}
 	
+	//TABLEVIEWER PROVIDERS
 	/**
 	 * Used to determine the fields displayed by each table column
 	 * @author Andrew Snook
@@ -242,12 +313,12 @@ public class MainScreen {
 			return "";
 		}
 	}
+	//END TABLEVIEWER PROVIDERS
 	
 	//Getters
 	protected TableViewer getTblVwrOrder() {
 		return tblVwrOrder;
 	}
-	
 }
 
 

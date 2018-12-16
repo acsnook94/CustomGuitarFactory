@@ -79,7 +79,7 @@ public class UpdateOrder extends Dialog {
 		
 		ComboViewer cboVwrNewStatus = new ComboViewer(composite_0, SWT.NONE);
 		Combo cboNewStatus = cboVwrNewStatus.getCombo();
-		cboNewStatus.setItems(new String[] {"Pending", "In Production", "Complete", "Shipped", "Cancelled"});
+		cboNewStatus.setItems(new String[] {"Pending", "In Production", "Shipped", "Complete", "Cancelled"});
 		GridData gd_cboNewStatus = new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1);
 		gd_cboNewStatus.widthHint = 305;
 		cboNewStatus.setLayoutData(gd_cboNewStatus);
@@ -93,11 +93,14 @@ public class UpdateOrder extends Dialog {
 			public void widgetSelected(SelectionEvent e) {
 				String newSelection = cboNewStatus.getText();
 				//System.out.println(newSelection);
-				
 				CustOrder curr = findCustOrder();
-				curr.setOrderStatus(newSelection);
-				Date update = new Date();
-				curr.setLastUpdated(update);
+				
+				//If the status was actually changed, then change order status and last updated fields
+				if(!curr.getOrderStatus().equals(newSelection)) {
+					curr.setOrderStatus(newSelection);
+					Date update = new Date();
+					curr.setLastUpdated(update);
+				}
 				
 				shlUpdateOrderStatus.close();
 				Startup.window.getTblVwrOrder().refresh();	//Updates order queue table on MainWindow			
