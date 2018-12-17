@@ -15,6 +15,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.widgets.Control;
 
 /**
  * This class is used to display a window which allows the user to update the status of an existing order.
@@ -100,6 +101,11 @@ public class UpdateOrder extends Dialog {
 					curr.setOrderStatus(newSelection);
 					Date update = new Date();
 					curr.setLastUpdated(update);
+					
+					//If the filter is not set to "All", decrement the value displayed by the order counter label by 1
+					if(!Startup.window.getCboStatusFilters().getText().equals("All")) {
+						Startup.window.getLblNumOrdersVal().setText(Integer.toString((Integer.parseInt((Startup.window.getLblNumOrdersVal().getText())) - 1)));
+					}
 				}
 				
 				shlUpdateOrderStatus.close();
@@ -111,6 +117,7 @@ public class UpdateOrder extends Dialog {
 		gd_btnSaveStatus.widthHint = 98;
 		btnSaveStatus.setLayoutData(gd_btnSaveStatus);
 		btnSaveStatus.setText("Save");
+		composite_0.setTabList(new Control[]{cboNewStatus, btnSaveStatus});
 	}
 	
 	/**
