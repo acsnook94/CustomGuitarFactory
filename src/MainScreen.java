@@ -169,7 +169,12 @@ public class MainScreen {
 			//Updates class variable "selectedOrderId" whenever user clicks on a new table row
 			public void selectionChanged(SelectionChangedEvent arg0) {
 				TableItem[] selection = tblVwrOrder.getTable().getSelection();
-				selectedOrderId = Integer.parseInt(selection[0].getText(0));
+				
+				try {
+					selectedOrderId = Integer.parseInt(selection[0].getText(0));
+				}
+				catch(Exception ex){
+				}
 			}
 		});
 		
