@@ -29,6 +29,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.DoubleClickEvent;
 
 /**
  * This class is used to display a window containing an order queue table, along with buttons which allow the user 
@@ -168,6 +170,13 @@ public class MainScreen {
 		composite_1.setLayoutData(fd_composite_1);
 		
 		tblVwrOrder = new TableViewer(composite_1, SWT.BORDER | SWT.FULL_SELECTION);
+		tblVwrOrder.addDoubleClickListener(new IDoubleClickListener() {
+			public void doubleClick(DoubleClickEvent e) {
+				AddOrder addOrder = new AddOrder();
+				addOrder.editMode = true;
+				addOrder.open();
+			}
+		});
 		tblVwrOrder.addSelectionChangedListener(new ISelectionChangedListener() {	
 			//Updates class variable "selectedOrderId" whenever user clicks on a new table row
 			public void selectionChanged(SelectionChangedEvent arg0) {
@@ -246,6 +255,7 @@ public class MainScreen {
 		FormData fd_lblNumOrders = new FormData();
 		fd_lblNumOrders.bottom = new FormAttachment(lblStatusFilters, 0, SWT.BOTTOM);
 		fd_lblNumOrders.left = new FormAttachment(composite_1, 0, SWT.LEFT);
+		composite_1.setTabList(new Control[]{tblOrder});
 		lblNumOrders.setLayoutData(fd_lblNumOrders);
 		lblNumOrders.setText("# of Orders:");
 		
