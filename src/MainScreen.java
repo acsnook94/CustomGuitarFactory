@@ -28,6 +28,7 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.widgets.Control;
 
 /**
  * This class is used to display a window containing an order queue table, along with buttons which allow the user 
@@ -162,6 +163,8 @@ public class MainScreen {
 		
 		btnUpdateOrder.setText("Update Status");
 		btnUpdateOrder.setBounds(10, 21, 97, 45);
+		grpButtons.setTabList(new Control[]{btnUpdateOrder, btnEditOrder, btnAddOrder, btnExit});
+		composite_0.setTabList(new Control[]{grpButtons});
 		composite_1.setLayoutData(fd_composite_1);
 		
 		tblVwrOrder = new TableViewer(composite_1, SWT.BORDER | SWT.FULL_SELECTION);
@@ -253,6 +256,7 @@ public class MainScreen {
 		fd_lblNumOrdersVal.left = new FormAttachment(lblNumOrders, 6);
 		lblNumOrdersVal.setLayoutData(fd_lblNumOrdersVal);
 		lblNumOrdersVal.setText("0");
+		shlCustomGuitarOrdering.setTabList(new Control[]{cboStatusFilters, composite_1, composite_0});
 		
 		isLoading = false;
 	}

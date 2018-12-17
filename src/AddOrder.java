@@ -16,6 +16,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import java.util.Date;
+import org.eclipse.swt.widgets.Control;
 
 /**
  * This class is used to display a window which will allow the user to add a new customized guitar order (for customer)
@@ -197,6 +198,7 @@ public class AddOrder {
 		
 		Composite composite_2 = new Composite(shlAddNewOrder, SWT.NONE);
 		fd_composite_0.right = new FormAttachment(composite_2, 0, SWT.RIGHT);
+		composite_0.setTabList(new Control[]{txtCustName, cboType, txtNumStrings, cboStyle, cboBodyMaterial, txtNumFrets, cboNeckMaterial, cboFretboardMaterial, cboNeckRadius, txtColor, cboFinishType, cboTuningPegs});
 		composite_2.setLayout(null);
 		FormData fd_composite_2 = new FormData();
 		fd_composite_2.top = new FormAttachment(composite_1, 0, SWT.TOP);
