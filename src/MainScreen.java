@@ -123,9 +123,9 @@ public class MainScreen {
 			//Opens the Add/Edit Order screen when "AddOrder" btn is clicked
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				AddOrder addOrder = new AddOrder();
+				AddOrder edit= new AddOrder();
 				AddOrder.editMode = false;
-				addOrder.open();
+				edit.open();
 			}
 		});
 		btnAddOrder.setLocation(10, 123);
@@ -173,7 +173,7 @@ public class MainScreen {
 		tblVwrOrder.addDoubleClickListener(new IDoubleClickListener() {
 			public void doubleClick(DoubleClickEvent e) {
 				AddOrder addOrder = new AddOrder();
-				addOrder.editMode = true;
+				AddOrder.editMode = true;
 				addOrder.open();
 			}
 		});
